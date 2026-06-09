@@ -1,0 +1,143 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{booktabs}
+
+\title{State-Space Derivation: 2-DOF Aeroelastic Wing}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+% ----------------------------------------------------------------
+\section*{Equation of Motion}
+
+The 2-DOF typical-section wing has generalised coordinates
+$\mathbf{q} = [h,\;\theta]^\top$ (plunge and pitch).
+The equation of motion under a vertical gust $w_g(t)$ is
+
+\begin{equation}
+  \mathbf{M}\,\ddot{\mathbf{q}}
+  + \bigl(\mathbf{C} + \mathbf{C}_a\bigr)\dot{\mathbf{q}}
+  + \bigl(\mathbf{K}_s + \mathbf{K}_a\bigr)\mathbf{q}
+  = \mathbf{F}_g\,w_g(t)
+  \label{eq:eom}
+\end{equation}
+
+where the system matrices are defined in Table~\ref{tab:matrices}.
+
+\begin{table}[h]
+\centering
+\caption{System matrices ($\bar{q}S = \tfrac{1}{2}\rho U^2 c\,b$)}
+\label{tab:matrices}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{ll}
+\toprule
+Matrix & Definition \\
+\midrule
+$\mathbf{M}$
+  & $\begin{bmatrix} m & S \\ S & I_p \end{bmatrix}$ \\[6pt]
+$\mathbf{C}$
+  & $\begin{bmatrix} 2c_d & 0 \\ 0 & \tfrac{1}{2}c_d d^2 \end{bmatrix}$,\quad
+    $\mathbf{C}_a = \dfrac{\bar{q}S\,C_{l\alpha}}{U}
+    \begin{bmatrix} 1 & 0 \\ -e_a & 0 \end{bmatrix}$ \\[6pt]
+$\mathbf{K}_s$
+  & $\begin{bmatrix} 2k & 0 \\ 0 & \tfrac{1}{2}k d^2 \end{bmatrix}$,\quad
+    $\mathbf{K}_a = \bar{q}S\,C_{l\alpha}
+    \begin{bmatrix} 0 & 1 \\ 0 & -e_a \end{bmatrix}$ \\[6pt]
+$\mathbf{F}_g$
+  & $\dfrac{\bar{q}S\,C_{l\alpha}}{U}\begin{bmatrix} -1 \\ e_a \end{bmatrix}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ----------------------------------------------------------------
+\section*{State-Space Conversion}
+
+Equation~\eqref{eq:eom} is second-order in $\mathbf{q}$.
+Introducing the state vector
+
+\begin{equation}
+  \mathbf{x} =
+  \begin{bmatrix} \mathbf{q} \\ \dot{\mathbf{q}} \end{bmatrix}
+  = \begin{bmatrix} h \\ \theta \\ \dot{h} \\ \dot{\theta} \end{bmatrix}
+  \in \mathbb{R}^4
+\end{equation}
+
+the time derivative is
+
+\begin{equation}
+  \dot{\mathbf{x}} =
+  \begin{bmatrix} \dot{\mathbf{q}} \\ \ddot{\mathbf{q}} \end{bmatrix}.
+\end{equation}
+
+Solving~\eqref{eq:eom} for $\ddot{\mathbf{q}}$:
+
+\begin{equation}
+  \ddot{\mathbf{q}}
+  = -\mathbf{M}^{-1}\mathbf{K}_{\text{eff}}\,\mathbf{q}
+    -\mathbf{M}^{-1}\mathbf{D}_{\text{tot}}\,\dot{\mathbf{q}}
+    +\mathbf{M}^{-1}\mathbf{F}_g\,w_g
+\end{equation}
+
+where $\mathbf{K}_{\text{eff}} = \mathbf{K}_s + \mathbf{K}_a$ and
+$\mathbf{D}_{\text{tot}} = \mathbf{C} + \mathbf{C}_a$.
+Substituting into $\dot{\mathbf{x}}$ yields the first-order system
+
+\begin{equation}
+  \boxed{
+  \dot{\mathbf{x}} = \mathbf{A}\,\mathbf{x} + \mathbf{B}\,w_g,
+  \qquad
+  \mathbf{y} = \mathbf{C}_{\text{out}}\,\mathbf{x}
+  }
+\end{equation}
+
+with
+
+\begin{equation}
+  \mathbf{A} =
+  \begin{bmatrix}
+    \mathbf{0}_{2\times2} & \mathbf{I}_2 \\[4pt]
+    -\mathbf{M}^{-1}\mathbf{K}_{\text{eff}} &
+    -\mathbf{M}^{-1}\mathbf{D}_{\text{tot}}
+  \end{bmatrix}
+  \in\mathbb{R}^{4\times4},
+  \qquad
+  \mathbf{B} =
+  \begin{bmatrix} \mathbf{0}_{2\times1} \\[4pt]
+                  \mathbf{M}^{-1}\mathbf{F}_g \end{bmatrix}
+  \in\mathbb{R}^{4\times1}
+\end{equation}
+
+\begin{equation}
+  \mathbf{C}_{\text{out}} =
+  \begin{bmatrix} \mathbf{I}_2 & \mathbf{0}_{2\times2} \end{bmatrix}
+  \in\mathbb{R}^{2\times4},
+  \qquad
+  \mathbf{D}_{\text{out}} = \mathbf{0}_{2\times1}.
+\end{equation}
+
+The output $\mathbf{y} = [h,\;\theta]^\top$ is the observable response;
+the input $w_g$ is the gust velocity.
+
+% ----------------------------------------------------------------
+\section*{Discrete-Time (ZOH) Form}
+
+For time-domain simulation with step size $\Delta t$ the exact
+zero-order-hold (ZOH) discretisation is
+
+\begin{equation}
+  \mathbf{x}_{k+1} = \mathbf{A}_d\,\mathbf{x}_k + \mathbf{B}_d\,w_g^{(k)}
+\end{equation}
+
+\begin{equation}
+  \mathbf{A}_d = e^{\mathbf{A}\Delta t},
+  \qquad
+  \mathbf{B}_d = \mathbf{A}^{-1}\!\bigl(e^{\mathbf{A}\Delta t} - \mathbf{I}\bigr)\mathbf{B}.
+\end{equation}
+
+In MATLAB: \texttt{Ad = expm(A*dt);\; Bd = A\textbackslash((Ad-eye(4))*B)}.
+
+\end{document}
