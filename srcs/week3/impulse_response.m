@@ -9,7 +9,9 @@ sys.InputName  = {'w_g'};
 
 % time vector: long enough for transient to decay
 t_end = 8;
-[y, t] = impulse(sys, t_end);     % y: [Nt x 2 x 1]
+opt = RespConfig; 
+opt.Amplitude = 100; 
+[y, t] = step(sys,t_end,opt);     % y: [Nt x 2 x 1]
 
 h_imp  = y(:,1) * 1000;           % [mm·s]  (impulse has units output·s)
 th_imp = rad2deg(y(:,2));          % [deg·s]
