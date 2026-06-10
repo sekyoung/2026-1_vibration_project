@@ -610,6 +610,8 @@ helpsearch/
 # --- Cloud Storage Metadata ---
 .MATLABDriveTag
 
+# --- MATLAB Patch ---
+.mat
 
 ### custom patch ###
 .claude/
