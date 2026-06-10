@@ -47,8 +47,7 @@ end
 function model = load_model(model_file)
 if isempty(model_file)
     here = fileparts(mfilename('fullpath'));
-    cand = {fullfile(here,'wing_2dof.mat'), ...
-            fullfile(here,'..','week3','wing_2dof.mat')};
+    cand = {fullfile(here,'wing_2dof.mat')};
     for c = cand
         if isfile(c{1}), model_file = c{1}; break; end
     end
