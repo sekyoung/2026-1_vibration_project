@@ -16,10 +16,10 @@ Ip  = 0.01;    % pitch inertia about reference       [kg*m^2]
 S   = 0.015;   % static unbalance = m*x_cg           [kg*m]
 d   = 0.25;    % distance between the two springs    [m]
 
-k1  = 1200.0;  % spring 1 stiffness                  [N/m]
-k2  = 1200.0;  % spring 2 stiffness                  [N/m]   (set != k1 for h-theta coupling)
-knl1 = 0.0;    % spring 1 cubic coefficient          [N/m^3] (set > 0 for hardening)
-knl2 = 0.0;    % spring 2 cubic coefficient          [N/m^3]
+k1  = 120.0;  % spring 1 stiffness                  [N/m]
+k2  = 120.0;  % spring 2 stiffness                  [N/m]   !(set != k1 for h-theta coupling)
+knl1 = 10.0;    % spring 1 cubic coefficient          [N/m^3] !(set > 0 for hardening)
+knl2 = 10.0;    % spring 2 cubic coefficient          [N/m^3]
 
 c1  = 3.0;     % damper 1 coefficient                [N*s/m]
 c2  = 3.0;     % damper 2 coefficient                [N*s/m]
