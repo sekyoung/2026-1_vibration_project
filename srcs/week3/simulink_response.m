@@ -12,6 +12,7 @@ t_end = 8;
 opt = RespConfig; 
 opt.Amplitude = 100; 
 [y, t] = step(sys,t_end,opt);     % y: [Nt x 2 x 1]
+%support all type of inputs: step, impulse, arbitrary time series, etc.
 
 h_imp  = y(:,1) * 1000;           % [mm·s]  (impulse has units output·s)
 th_imp = rad2deg(y(:,2));          % [deg·s]
