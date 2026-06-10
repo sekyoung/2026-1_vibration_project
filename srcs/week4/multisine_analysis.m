@@ -13,6 +13,7 @@ wg_ts = multisine_function_generator();
 t     = wg_ts.Time;
 wg    = wg_ts.Data;
 
+
 % ---------- simulate — lsim accepts continuous sys directly ------
 y_out  = lsim(sys, wg, t);
 h_mm   = y_out(:,1) * 1000;

@@ -573,6 +573,43 @@ pyrightconfig.json
 .history
 .ionide
 
+# ==========================================
+# MATLAB and Simulink Standard .gitignore
+# ==========================================
+
+# --- Autosave and Text Editor Backup Files ---
+*.asv
+*.m~
+*.autosave
+
+# --- Simulink Backup Files ---
+*.slx.~*
+*.mdl.~*
+
+# --- Compiled MEX binaries (Platform-specific binaries) ---
+*.mex*
+
+# --- Code Generation Folders (Simulink / MATLAB Coder) ---
+slprj/
+sccprj/
+codegen/
+
+# --- Simulation Cache Files ---
+*.slxc
+
+# --- Packaged Apps and Toolboxes ---
+*.mlappinstall
+*.mltbx
+
+# --- Deployable Archives (MATLAB Compiler) ---
+*.ctf
+
+# --- Generated Documentation and Help Search ---
+helpsearch/
+
+# --- Cloud Storage Metadata ---
+.MATLABDriveTag
+
 
 ### custom patch ###
 .claude/
