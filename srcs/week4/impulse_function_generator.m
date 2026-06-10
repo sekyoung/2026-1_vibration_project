@@ -8,6 +8,8 @@ function gust = impulse_function_generator(varargin)
 %   gust = impulse_function_generator('standard','scaled')   % default
 %   gust = impulse_function_generator('standard','cs25')     % literal CS-25 range
 
+%   only crit gusts visualized by default, so that the plot is not too busy. For more, run impulse_all.m
+
 cfg = default_config();
 for i = 1:2:numel(varargin)
     cfg.(varargin{i}) = varargin{i+1};
