@@ -34,8 +34,3 @@ Both responses are driven by the §25.341 critical 1-cosine gust, reusing existi
 
 - **Constant k (left panel):** `impulse_function_generator('model_file', wing_nl.mat, 'plot', false)` supplies the gust family and critical column tuned against the `build_ss_nl` linearization; `lsim` on (A, B, C, D) gives $h(t),\theta(t)$. With $k_{nl}=0$ in the moment evaluation, the tangent stiffness is constant.
 - **Varying k (right panel):** `nonlinear_response(4)` integrates the full cubic-spring EOM under the same gust type and returns $h(t),\theta(t)$; the full $F_i = k_i\delta_i + k_{nl,i}\delta_i^3$ is used, so the effective stiffness varies with deflection.
-
-## Notes
-
-- `nonlinear_response` always draws its own 4-row figure; `moment_response` closes it immediately after the call. Adding a `'plot'` flag to `nonlinear_response` would be cleaner if this becomes a regular workflow.
-- Inside `nonlinear_response` (case 4) the gust generator is called **without** `model_file`, so its tuning sweep runs against the Week-3 `wing_2dof.mat` (k = 1200 N/m), not the `build_ss_nl` model. The two panels therefore see slightly differently tuned gusts. If strict consistency is wanted, pass `'model_file'` through in `to_forcing`.

@@ -2,6 +2,7 @@
 %
 % Row 1: time traces  — w_g(t)  |  h(t) [mm]  |  θ(t) [deg]
 % Row 2: bode         — |H_h(f)|              |  |H_θ(f)|  |  phase (both)
+%! ALL IN ONE: multisine time response + bode (2×3 figure)
 
 here = fileparts(mfilename('fullpath'));
 load(fullfile(here,'wing_2dof.mat'), 'A','B','C_out','D_out','fn_struct');
