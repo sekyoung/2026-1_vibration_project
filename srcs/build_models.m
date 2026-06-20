@@ -82,7 +82,7 @@ end
 function build_nl(here)
 % Per-spring model with cubic stiffness (cubic lives in the solver only).
 m  = 2.0;      % section mass                 [kg]
-Ip = 0.01;     % pitch inertia                [kg*m^2]
+Ip = 0.1;     % pitch inertia                [kg*m^2]
 S  = 0.015;    % static unbalance             [kg*m]
 d  = 0.25;     % distance between springs     [m]
 
