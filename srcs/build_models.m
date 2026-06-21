@@ -26,11 +26,11 @@ end
 
 function [qS, Ka, Ca, Fgust, aero] = aero_terms()
 aero.rho     = 1.225;   % air density          [kg/m^3]
-aero.U       = 12.0;    % freestream speed     [m/s]
+aero.U       = 10.0;    % freestream speed     [m/s]
 aero.chord   = 0.30;    % airfoil chord        [m]
 aero.span    = 0.50;    % section span         [m]
-aero.Clalpha = 2*pi;    % lift-curve slope     [1/rad]
-aero.ea      = 0.05;    % aero centre fwd of reference [m]
+aero.Clalpha = 6.0;    % lift-curve slope     [1/rad]
+aero.ea      = 0.045;    % aero centre fwd of reference [m]
 
 qS    = 0.5 * aero.rho * aero.U^2 * aero.chord * aero.span;
 Ka    = [0,  qS*aero.Clalpha;
@@ -44,12 +44,12 @@ end
 
 function build_2dof(here)
 % Week-3 linear model, lumped springs (k each side, symmetric).
-m  = 2.0;      % section mass                 [kg]
-Ip = 0.01;     % pitch inertia                [kg*m^2]
-S  = 0.015;    % static unbalance             [kg*m]
-k  = 1200.0;   % each spring stiffness        [N/m]
-cd = 3.0;      % each damper coefficient      [N*s/m]
-d  = 0.25;     % distance between springs     [m]
+m  = 1.5;      % section mass                 [kg]
+Ip = 0.084;     % pitch inertia                [kg*m^2]
+S  = 0.0225;    % static unbalance             [kg*m]
+k  = 900;   % each spring stiffness        [N/m]
+cd = 1.0;      % each damper coefficient      [N*s/m]
+d  = 0.045;     % distance between springs     [m]
 
 [~, Ka, Ca, Fgust, aero] = aero_terms();
 

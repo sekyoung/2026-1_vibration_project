@@ -7,7 +7,7 @@ function root_locus_U()
 % a branch crosses the imaginary axis (Re = 0, Im ≠ 0), and saves a plot.
 
 % ---- physical parameters (must match build_2dof / aero_terms) ----------
-m  = 2.0;     Ip = 0.01;    S  = -0.05;
+m  = 2.0;     Ip = 0.01;    S  = 0.015;
 k  = 1200.0;  cd = 3.0;     d  = 0.25;
 
 rho     = 1.225;   chord   = 0.30;
@@ -74,14 +74,18 @@ figure('Name', 'Root Locus vs aero.U', 'Position', [80 80 950 680]);
 hold on;  grid on;  ax = gca;
 
 colors = lines(4);
-branch_labels = {'Mode 1 (lower \omega)', 'Mode 1 (conj.)', ...
-                 'Mode 2 (conj.)',          'Mode 2 (upper \omega)'};
+branch_labels = {'Mode 1 (lower \omega)','Mode 2 (upper \omega)',...
+                 'Mode 2 (conj.)','Mode 1 (conj.)'};
 
 for b = 1:4
-    plot(real(ev_mat(b,:)), imag(ev_mat(b,:)), '-', ...
+   
+plot(real(ev_mat(b,:)), imag(ev_mat(b,:)), '-', ...
          'Color', colors(b,:), 'LineWidth', 1.8, ...
          'DisplayName', branch_labels{b});
-
+      %{        
+    plot(real(ev_mat(b,:)), imag(ev_mat(b,:)), '-', ...
+         'Color', colors(b,:), 'LineWidth', 1.8);
+      %}
     % circle at low-U end
     plot(real(ev_mat(b,1)), imag(ev_mat(b,1)), 'o', ...
          'Color', colors(b,:), 'MarkerFaceColor', colors(b,:), ...
