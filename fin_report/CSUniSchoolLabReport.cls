@@ -44,7 +44,10 @@
 
 \usepackage{mhchem} % Package for chemical equation typesetting
 \usepackage{siunitx} % Provides the \SI{}{} and \si{} commands for typesetting technical/scientific SI units correctly
-
+\sisetup{
+  round-mode = figures,
+  round-precision = 3 % Sets all numbers to 3 significant figures
+}
 \usepackage{amsmath} % Required for some math elements 
 \usepackage{tablefootnote} % Required for footnotes in tables
 \usepackage{kotex} % Required for Korean characters
@@ -56,15 +59,44 @@
 \usepackage{subcaption} % Required for creating subfigures
 \usepackage{pdflscape} % Rotates the page horizontally in the PDF reader
 \usepackage{multicol}   % Allows flexible multi-column formatting
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{minted}
+\lstset{
+  language=Matlab,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!70!black},
+  commentstyle=\color{gray},
+  stringstyle=\color{orange!80!black},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=6pt,
+  breaklines=true,
+  frame=single,
+  framesep=4pt,
+  captionpos=b,
+  showstringspaces=false,
+  extendedchars=true,
+  literate=
+    {–}{{--}}1
+    {—}{{---}}1
+    {─}{{-}}1
+    {×}{{$\times$}}1
+    {θ}{{$\theta$}}1
+    {→}{{$\to$}}1
+    {≠}{{$\neq$}}1
+    {·}{{\ensuremath{\cdot}}}1,
+}
+
+\usepackage{verbatim}
 %----------------------------------------------------------------------------------------
 %	MARGINS
 %----------------------------------------------------------------------------------------
-
 \usepackage[
-	top=2.54cm, % Top margin
-	bottom=2.54cm, % Bottom margin
-	left=1.91cm, % Left margin
-	right=1.91cm, % Right margin
+	top=1.8cm, % Top margin
+	bottom=1.8cm, % Bottom margin
+	left=2cm, % Left margin
+	right=2cm, % Right margin
 	%showframe % Uncomment to show frames around the margins for debugging purposes
 ]{geometry}
 

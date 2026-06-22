@@ -8,7 +8,7 @@ function root_locus_U()
 
 % ---- physical parameters (must match build_2dof / aero_terms) ----------
 m  = 1.5;     Ip = 0.0084;    S  = 0.0225;
-k  = 900.0;  cd = 1.0;     d  = 0.22;
+k  = 5500.0;  cd = 1.0;     d  = 0.22;
 
 rho     = 1.225;   chord   = 0.30;
 span    = 0.50;    Clalpha = 6;
@@ -137,6 +137,6 @@ legend('Location', 'best', 'FontSize', 9);
 
 here = fileparts(mfilename('fullpath'));
 out  = fullfile(here, 'root_locus_U.png');
-exportgraphics(gcf, out, 'Resolution', 300);
+%exportgraphics(gcf, out, 'Resolution', 300);
 fprintf('Figure saved: %s\n', out);
 end

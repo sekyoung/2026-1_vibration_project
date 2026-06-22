@@ -21,10 +21,12 @@
 
 \documentclass[
 	a4paper, % Paper size, specify a4paper (A4) or letterpaper (US letter)
-	11pt, % Default font size, specify 10pt, 11pt or 12pt
+	10pt, % Default font size, specify 10pt, 11pt or 12pt
 ]{CSUniSchoolLabReport}
 
 \addbibresource{sample.bib} % Bibliography file (located in the same folder as the template)
+
+
 
 %----------------------------------------------------------------------------------------
 %	REPORT INFORMATION
@@ -41,16 +43,30 @@
 
 \begin{document}
 
-%\maketitle % Insert the title, author and date using the information specified above
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\begin{titlepage}
+  \centering
+  \vspace*{3cm}
 
-% \begin{center}
-% 	\begin{tabular}{l r}
-% 		Date Performed: & February 13, 2022 \\ % Date the experiment was performed
-% 		Partners: & Cecilia \textsc{Smith} \\ % Partner names
-% 		& Tajel \textsc{Khumalo} \\
-% 		Instructor: & Professor \textsc{Rivera} % Instructor/supervisor
-% 	\end{tabular}
-% \end{center}
+  {\Large\bfseries 항공기 날개 공력탄성학 및 플러터 진동 해석\par}
+  \vspace{0.6em}
+  {\large Aeroelasticity and Flutter Analysis of Aircraft Wings\par}
+
+  \vspace{1.5cm}
+  \rule{0.6\textwidth}{0.4pt}
+  \vspace{1.5cm}
+
+  \begin{tabular}{rl}
+    과목번호 & 120520-1 \\[6pt]
+    학번     & C417025  \\[6pt]
+    이름     & 김세경   \\[6pt]
+    제출일   & \today   \\
+  \end{tabular}
+
+  \vfill
+\end{titlepage}
 
 % If you need to include an abstract, uncomment the lines below
 %\begin{abstract}
@@ -67,8 +83,6 @@
 %----------------------------------------------------------------------------------------
 
 \section{시스템 모델 및 상태공간,전달함수 정의}
-\subsection{모델 간소화 및 자유도 축소}
-해당 탐구에서는 해석을 용이하게 하기위한,그리고  자원의 한계로 다음과 같은 가정하에서 프로젝트를 진행하였다.
 \subsection{모델 간소화 및 자유도 축소}
 해석의 용이성과 자원의 한계를 고려하여 다음 가정 하에 진행하였다. 날개는 형상이
 변하지 않는 대칭,균일 구조이다; 이때 탄성에 의한 효과는 길이 방향만 고려하며, 날개의 길이는
@@ -122,7 +136,7 @@ steady한 상황의 미소 섭동(perturbation)에서 시스템은 선형시간�
 \(\mathbf{x} = [\mathbf{q},\;\dot{\mathbf{q}}]^\top \in \mathbb{R}^4\)로 정의하면,위의 운동방정식은
 상태공간으로 나타내 줄 수 있다. \(\mathbf{K}_{\text{eff}} = \mathbf{K}_s + \mathbf{K}_a\),
 \(\mathbf{D}_{\text{tot}} = \mathbf{C} + \mathbf{C}_a\)로 두고 \(\ddot{\mathbf q}\)에 대해 정리한 뒤,
-출력을\(\mathbf y = \mathbf q = [h,\ \theta]^\top\)라 하면,
+출력을 \(\mathbf y = \mathbf q = [h,\ \theta]^\top\)라 하면,
 \begin{equation}
     \boxed{
     \dot{\mathbf{x}} = \mathbf{A}\,\mathbf{x} + \mathbf{B}\,w_g,
@@ -130,7 +144,7 @@ steady한 상황의 미소 섭동(perturbation)에서 시스템은 선형시간�
     \mathbf{y} = \mathbf{C}_{\text{out}}\,\mathbf{x}
     }
 \end{equation}
-를 얻는다.행렬 \(\mathbf A,\mathbf B,\mathbf C_{\text{out}}\)의 구체적 형태와 변환 과정은
+를 얻는다. 행렬 \(\mathbf A,\mathbf B,\mathbf C_{\text{out}}\)의 구체적 형태와 변환 과정은
 부록 \cref{sec:state-space}에 정리하였다. 상태공간을 앎으로써 임의의 돌풍 입력 \(w_g\)에 대한
 익형의 변위·회전 응답을 예측할 수 있고, 시스템 행렬 \(\mathbf A\)의 고유값·고유벡터로부터
 안정성, 공진주파수, 모드형태를 분석할 수 있다.
@@ -173,7 +187,7 @@ steady한 상황의 미소 섭동(perturbation)에서 시스템은 선형시간�
         \includegraphics[width=\textwidth]{Figures/week1_change_damping.png}
         \caption{damping ratio \(\zeta\) 변화에 따른 진동 소산 현상의 변화.}
     \end{subfigure}
-    \caption{\(x(t) = Xe^{-\zeta w_{n}t}\cos(\sqrt{1-\zeta^2}w_{n}t-ϕ)\)}
+    \caption{\(x(t) = Xe^{-\zeta w_{n}t}\cos(\sqrt{1-\zeta^2}w_{n}t-\phi)\)}
     \label{fig:week1}
 \end{figure}
 감쇠비가 1 이하이면
@@ -247,7 +261,7 @@ $w_n$을 고정시키고 탐구를 해보면, 질량을 증가시키면 시스�
     \caption{Frequency response of sine waves with rms=1.5 }
 \end{figure}
 \subsection{속도에 따른 고유값의 변화(WEEK5)}
-\eqref{eq:eom}에서, 공기력 행렬의 \(C_a,F_g\)는 \(U\)에 대한 함수임을 알 수 있다. 즉, 속도가 변함에 따라 system matrix \(\mathbf{A}\)가 변하므로,
+\eqref{eq:eom-main}에서, 공기력 행렬의 \(C_a,F_g\)는 \(U\)에 대한 함수임을 알 수 있다. 즉, 속도가 변함에 따라 system matrix \(\mathbf{A}\)가 변하므로,
 평균 순항속도\(U\)에 따라서 시스템의 \(\lambda\)\footnote{eigenvalue}가 달라진다. 해당 시스템의 두개의 모드는 고유값의 허수부분에,감쇠는 실수에
 연결되어져 있는것을 이용하기 root-locus plot를 사용하여 RHS를 넘어가는 고유값이 있나 살펴보았다.\footnote{켤레를 제외한, 두개의 고유한 고유값들 중 하나라도 root-locus plot
 에서 RHS로 넘어가면 시스템은 발산한다}
@@ -262,14 +276,14 @@ $w_n$을 고정시키고 탐구를 해보면, 질량을 증가시키면 시스�
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/week5_flutter_vs_d_2D.png}
-        \caption{공력중심과 무게중심 사이 간격 \(d\)에 따른 속도와 flutter boundary사이의 관계}
+        \caption{공력중심과 무게중심 사이 간격 \(e_a\)에 따른 속도와 flutter boundary사이의 관계}
         \label{fig:flutter_boundary_w_d}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/week5_flutter_vs_d_3D.png}
-        \caption{공력중심과 무게중심 사이 간격 \(d\)에 따른 속도와 고유값 사이의 관계}
+        \caption{공력중심과 무게중심 사이 간격 \(e_a\)에 따른 속도와 고유값 사이의 관계}
     \end{subfigure}
     \caption{5주차 결과. 빨간색 네모는 시스템이 \cref{tab:params}일 때 시스템이 위치하는 곳이다.}
     \label{fig:week5}
@@ -287,8 +301,8 @@ $w_n$을 고정시키고 탐구를 해보면, 질량을 증가시키면 시스�
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/week4_nl_moment_response.png}
-    \caption{Impulse and multisine response of linear and nonlinear spring stiffness. velocity \(U\)is taken to
-        flutter boundary speed to emphasize its difference behavior, and cubic term used here is 900. others are same as above.}
+    \caption{Impulse and multisine response of linear and nonlinear spring stiffness. velocity \(U\) is taken to
+        flutter boundary speed to emphasize its different behavior, and cubic term used here is 900. Others are same as above.}
 \end{figure}
 보이는 바와 같이, 초기단계에서는 두개가 별 차이가 없으나, 시간이 갈수록 그 차이가 점점 커짐을 알 수 있다. 또한 선형에 비해 비선형에서 모멘트가 커지므로,
 비선형의 경우에서 피로 또는 항복응력 초과의 확률이 더 높음을 알 수 있다.하지만, 주기적으로 힘이 작용하는 sine함수와 달리
@@ -298,13 +312,16 @@ impulse와 같은, 단기적으로 힘이 작용하는 경우에는, 선형,비�
 5주에 걸친 해석을 종합하면, 안정적이면서 경량인 날개는 아래와 같은 최소 세가지 시선을 만족해야함을 알 수 있다.
 \begin{itemize}
     \item[1,2주차] 질량$\&$강성 trade-off에서 공진 진폭을 피로 한계 이내로 누르는 최소 강성
-\(k \approx \SI{}{\newton\per\metre}\)
+\(k \approx \SI{5500}{\newton\per\metre}\)
 \item[3주차] 주파수 응답 공진 대역폭을 난류 저주파 공진주파수 밖으로 밀어내는 \(w_d\)
 \item[5주차] 플러터 한계를 최고 비행속도
-\(V_{\max}\) 이상으로 확보하기 위해 무게중심--탄성중심 간격 \(d\)  
+\(V_{\max}\) 이상으로 확보하기 위해 무게중심--탄성중심 간격 \(e_a\)  
 \end{itemize}
-4주차에서 보였듯 이 운용 영역에서는 비선형 경화 효과가 충분히 작아, 선형 해석만으로
-설계 검증이 타당하다. 위 세 조건을 만족하는 권장값은 \cref{tab:final}에 정리하였다.
+4주차에서 보였듯,지속적으로 몰아치는 드문 난기류의 경우를 제외한,임펄스,혹은 시간이 짧은 외부충격의 경우
+비선형 효과가 충분히 작아,선형효과만으로
+설계 검증이 타당함을 위에서 보였다.비선형 조건을 제외하고,선형시스템에서 위 세가지 조건을
+모두 만족하는 물리량들은 \cref{tab:final}에 정리하였다.나오지 않은 물리량들은
+\cref{tab:params}의 값들이다.
 \begin{table}[H]
     \centering
     \caption{종합 해석으로부터 도출한 권장 설계 파라미터.}
@@ -313,9 +330,9 @@ impulse와 같은, 단기적으로 힘이 작용하는 경우에는, 선형,비�
         \toprule
         설계값               & 근거 (주차)                 & 권장 방향 / 값                          \\
         \midrule
-        간격 \(d\)           & 플러터 한계 (5주)            & \(d \le 2.5203\SI{}{\centi\meter}\;(V_f=\qty{29.633}{m/s} > V_{\max} )\) \\
-        공진주파수\tablefootnote{위에 서술한 Von Karman식에 $V_f$값 대입시 값 감소가 뚜렷해지는 지점을 $w_d_crit$로 지정하였다} \(w_d\)    & 로우패스 대역 (3주)          & $w_d$ $\geq $13.55223\SI{}{\hertz}      \\
-        강성 \(k\)          & 질량--강성 trade-off (1·2주) & \(k \gtrsim \SI{5}{\newton\per\metre}\) \\
+        간격 \(e_a\)             & 플러터 한계 (5주)            & \(d \le \SI{2.5203}{\centi\meter}\;(V_f=\qty{29.633}{m/s} > V_{\max} )\) \\
+        공진주파수\tablefootnote{위에 서술한 Von Karman식에 $V_f$값 대입시 값 감소가 뚜렷해지는 지점을 $w_{d,\mathrm{crit}}$로 지정하였다} \(w_d\)    & 로우패스 대역 (3주)          & \(w_d \geq \SI{13.55223}{\hertz}\)      \\
+        강성\footnote{강성에 따라 공진주파수와 간격이 달라지나, 모두 위의 조건을 만족하면 자동으로 만족하는 것을 확인하였다.} \(k\)          & 질량--강성 trade-off (1·2주) & \(k \gtrsim \SI{5500}{\newton\per\metre}\) \\
         비선형 항             & 돌풍 응답 (4주)              & 순항조건에서 무시 가능                    \\
         \bottomrule
     \end{tabular}
@@ -406,7 +423,7 @@ of attack through \(C_{l\alpha}\):
 \end{equation}
 For a NACA~2412 airfoil, \(C_{l\alpha} = \text{Const} (\approx 2\pi)\), and \(\bar{q} S\) is the dynamic
 pressure multiplied by the planform area.\footnote{The unsteady Theodorsen/Sears
-    corrections are omitted. this slightly overestimates the
+    corrections are omitted. This slightly overestimates the
     peaks but is appropriate for the present reduced-order model.}
 The virtual work of the upward lift
 under a virtual displacement of \(P\) gives the generalised forces:
@@ -415,7 +432,7 @@ under a virtual displacement of \(P\) gives the generalised forces:
     \label{eq:Q}
 \end{equation}
 The constant aerodynamic-centre moment \(M_{\mathrm{ac}}\) only shifts the trim and is dropped
-from the dynamics.Splitting \eqref{eq:lift} into a part driven by the motion (\(\theta\), \(\dot{h}\), \(\dot{\theta}\)) and a
+from the dynamics. Splitting \eqref{eq:lift} into a part driven by the motion (\(\theta\), \(\dot{h}\), \(\dot{\theta}\)) and a
 part driven by the gust \(w_g\),
 \begin{equation}
     \begin{bmatrix}Q_h\\ Q_\theta\end{bmatrix}
@@ -505,6 +522,255 @@ bending moment) are obtained by modifying \(\mathbf C_{\text{out}}\) and
 %----------------------------------------------------------------------------------------
 %\end{multicols}
 %\end{landscape}
+
+%----------------------------------------------------------------------------------------
+%	SOURCE CODE
+%----------------------------------------------------------------------------------------
+\section{소스코드}\label{sec:code}
+
+\subsection{저장소 구조}
+전체 소스코드는 아래 GitHub 저장소에 공개되어 있다.\\[4pt]
+\url{https://github.com/sekyoung/2026-1_vibration_project}\\[6pt]
+\noindent 주차별 분석 스크립트는 \texttt{srcs/} 아래 주차 폴더에,
+공통 유틸리티는 \texttt{srcs/} 루트에 위치한다.
+
+\begin{small}
+\begin{verbatim}
+srcs/
+ ├── build_models.m              % 선형/비선형 상태공간 행렬 생성 및 .mat 저장
+ ├── modal_analysis.m            % 고유값·감쇠비 분석 및 극점 지도 출력
+ ├── week1.jl                    % 1주차: curve-fitting 등가모델 (Julia)
+ ├── week2.jl                    % 2주차: 가진 응답 분석 (Julia)
+ ├── week2/
+ │    ├── fourier_torque.jl      % 로터리 엔진 토크의 푸리에 분해
+ │    └── tangential_force.jl    % 접선력 산출
+ ├── week3/
+ │    ├── bode_response.m        % Bode 선도
+ │    ├── impulse_response.m     % 임펄스 응답
+ │    ├── multisine_analysis.m   % 멀티사인 주파수 응답 분석
+ │    ├── multisine_function_generator.m
+ │    └── multisine_toolbox_response.m
+ ├── week4/
+ │    ├── impulse_all.m          % 선형·비선형 임펄스 비교
+ │    ├── impulse_function_generator.m
+ │    ├── moment_response.m      % 굽힘 모멘트 응답
+ │    ├── multisine_function_generator.m
+ │    ├── nonlinear_response.m   % 비선형 적분 (ode45)
+ │    └── result_plot.m
+ └── week5/
+      ├── flutter_vs_d.m         % 스프링 간격 d에 따른 플러터 경계
+      └── root_locus_U.m         % 속도에 따른 root-locus
+\end{verbatim}
+\end{small}
+
+\subsection{공통 유틸리티 코드}
+
+\subsubsection{\texttt{build\_models.m}}
+모든 주차 스크립트가 공유하는 \texttt{.mat} 데이터 파일을 생성하는 진입점이다.
+내부적으로 두 함수를 호출한다:
+\texttt{build\_2dof()}는 선형 2DOF 모델(\texttt{wing\_2dof.mat})을,
+\texttt{build\_nl()}은 각 스프링에 3차 비선형 항을 포함한 모델(\texttt{wing\_nl.mat})을 조립하여 저장한다.
+공통 공력 행렬(\(\mathbf{K}_a,\mathbf{C}_a,\mathbf{F}_g\))은 \texttt{aero\_terms()}에서 한 번만 계산한 뒤 두 모델에 재사용된다.
+
+\lstinputlisting[caption={\texttt{build\_models.m} --- 상태공간 모델 생성}]{../srcs/build_models.m}
+
+\subsubsection{\texttt{modal\_analysis.m}}
+\texttt{wing\_2dof.mat}을 불러와 구조 고유값(\(\mathbf{A}_{\text{struct}}\))과
+공력탄성 고유값(\(\mathbf{A}\))을 각각 계산한다.
+내부 함수 \texttt{classify\_eigs()}가 켤레 복소 극점(부족감쇠)과 실수 극점(과감쇠·발산)을 자동으로 분류하여
+고유진동수 \(f_n\), 감쇠비 \(\zeta\)를 표로 출력하고 극점 지도를 그린다.
+
+\lstinputlisting[caption={\texttt{modal\_analysis.m} --- 고유값 분석 및 극점 지도}]{../srcs/modal_analysis.m}
+
+\subsection{주차별 Pluto 노트북 (Julia)(WEEK1,WEEK2)}
+Pluto.jl은 Julia 기반의 반응형 노트북 환경으로, 각 셀은 파일 내에서
+\texttt{\# \texttt{╔═╡} UUID} 주석으로 구분된다.
+아래 코드에서 해당 주석이 회색으로 표시되어 셀 경계 역할을 한다.
+패키지 의존성 잠금 파일(\texttt{PLUTO\_*\_TOML\_CONTENTS})은 자동 생성
+코드이므로 제외하였다. julia를 다운받아서 pluto를 통해 여는것이 제일 추천되는 방식이다.
+
+\subsubsection{\texttt{week1.jl} --- 1주차: curve-fitting 등가모델}
+\texttt{CSV.jl}로 Ground Vibration Test 데이터를 불러온 뒤 Butterworth 대역통과 필터를
+적용하고, Gradient Descent / Gauss-Newton / CurveFit 세 알고리즘으로
+자유진동 해 \(x(t)=Xe^{-\zeta\omega_n t}\cos(\omega_d t - \phi)\)의
+파라미터를 피팅한다. 마지막 셀에서는 감쇠비 \(\zeta\)를 sweep하여
+임계감쇠 근방 거동의 차이를 시각화한다.
+
+\inputminted[
+  firstline=1, lastline=359,
+  fontsize=\scriptsize,
+  breaklines=true,
+  linenos=true,
+  numbersep=6pt,
+  frame=lines,
+  framesep=4pt,
+  label=week1.jl,
+  labelposition=topline,
+]{julia}{../srcs/week1.jl}
+
+\subsubsection{\texttt{week2.jl} --- 2주차: 가진 응답 및 질량-강성 Pareto}
+Rotary 엔진의 접선력을 Fourier 분해하여 날개 1DOF 운동방정식의 외력으로 사용한다.
+\texttt{DifferentialEquations.jl}의 \texttt{Tsit5} 적분기로 시간 응답을 구하고,
+질량--강성 2D grid에 대한 brute-force Pareto frontier를 \texttt{Threads.@threads}로
+병렬 계산한다. RPM sweep으로 공진 RPM 대역을 확인한 뒤 주파수 분리 조건을 통해
+권장 강성 상한을 도출한다.
+
+\inputminted[
+  firstline=1, lastline=348,
+  fontsize=\scriptsize,
+  breaklines=true,
+  linenos=true,
+  numbersep=6pt,
+  frame=lines,
+  framesep=4pt,
+  label=week2.jl,
+  labelposition=topline,
+]{julia}{../srcs/week2.jl}
+
+\subsubsection{\texttt{tangential\_force.jl} --- 크랭크핀 접선력 모델}
+단일 실린더 내연기관의 크랭크핀 접선력을 계산하는 라이브러리.
+Mendes et al.(2008) 논문의 식 (8)–(13)을 구현하며, 가스 하중(\texttt{F\_tg})과
+왕복 관성력(\texttt{F\_ta})의 합으로 결과 접선력 \(F_t\)를 산출한다.
+\texttt{sweep\_cycle()}은 1회 4행정 사이클(0–720도)에 걸쳐 모든 성분을 벡터로 반환하고,
+\texttt{plot\_rpm\_fig()}는 임의 RPM에서의 접선력 그래프를 생성해 \texttt{week2.jl}의
+인터랙티브 슬라이더에 연결된다.
+
+\inputminted[
+  fontsize=\scriptsize,
+  breaklines=true,
+  linenos=true,
+  numbersep=6pt,
+  frame=lines,
+  framesep=4pt,
+  label=week2/tangential\_force.jl,
+  labelposition=topline,
+]{julia}{../srcs/week2/tangential_force.jl}
+
+\subsubsection{\texttt{fourier\_torque.jl} --- 접선력의 Fourier 분해}
+\texttt{tangential\_force.jl}에서 얻은 \(F_t\) 파형을 Fourier 급수로 분해하는 라이브러리.
+\texttt{fourier\_decompose()}가 DFT로 복소 계수 \(H_n\)과 각주파수 \(\omega_n\)을 추출하고,
+\texttt{evaluate\_fourier()}로 임의의 시간 \(t\)에서 재건 파형을 계산한다.
+내부 \texttt{\_stft\_spectrogram()} 함수는 3주기 분을 타일링하여 STFT 스펙트로그램을 생성,
+시간-주파수 에너지 분포를 시각화한다.
+
+\inputminted[
+  fontsize=\scriptsize,
+  breaklines=true,
+  linenos=true,
+  numbersep=6pt,
+  frame=lines,
+  framesep=4pt,
+  label=week2/fourier\_torque.jl,
+  labelposition=topline,
+]{julia}{../srcs/week2/fourier_torque.jl}
+
+%----------------------------------------------------------------------------------------
+%	WEEK 3 — Low-pass filter & resonance
+%----------------------------------------------------------------------------------------
+\subsection{3주차: 날개의 로우패스 필터 특성과 공명현상 (MATLAB)}
+2DOF 날개 모델의 주파수 응답을 분석한다.
+Bode 선도, 임펄스 응답, Schroeder 위상 멀티사인을 이용하여
+날개가 저주파 대역에서 큰 이득을 가지는 로우패스 필터 특성을 확인하고
+공진 대역폭을 정량적으로 파악한다.
+
+\subsubsection{\texttt{bode\_response.m}}
+\texttt{wing\_2dof.mat}의 상태공간 모델로부터 주파수 전달함수를 구성하고,
+0.1\,Hz\,--\,50\,Hz 로그 스윕에서 플런지 \(h\)와 피치 \(\theta\) 각각의 Bode 선도를 출력한다.
+
+\lstinputlisting[caption={\texttt{bode\_response.m} --- Bode 선도}]{../srcs/week3/bode_response.m}
+
+\subsubsection{\texttt{impulse\_response.m}}
+상태공간 시스템에 단위 임펄스 돌풍을 가했을 때 플런지와 피치의 자유 응답을 계산한다.
+응답 진폭으로부터 고유진동수와 감쇠비를 정성적으로 확인할 수 있다.
+
+\lstinputlisting[caption={\texttt{impulse\_response.m} --- 임펄스 응답}]{../srcs/week3/impulse_response.m}
+
+\subsubsection{\texttt{multisine\_function\_generator.m}}
+Schroeder 위상 멀티사인 신호를 생성하는 함수.
+기본 주파수 \(f_0\), 고조파 수 \(K\), RMS 진폭, 샘플링률, 주기 수를 인자로 받아
+\texttt{timeseries} 객체로 반환한다.
+
+\lstinputlisting[caption={\texttt{multisine\_function\_generator.m} --- Schroeder 멀티사인 생성}]{../srcs/week3/multisine_function_generator.m}
+
+\subsubsection{\texttt{multisine\_analysis.m}}
+멀티사인 돌풍 신호에 대한 시간 응답과 Bode 선도를 \(2\times3\) 서브플롯으로 한 화면에 출력한다.
+상단 행은 \(w_g(t)\), \(h(t)\), \(\theta(t)\) 시계열, 하단 행은 \(|H_h(f)|\), \(|H_\theta(f)|\),
+위상을 나타낸다.
+
+\lstinputlisting[caption={\texttt{multisine\_analysis.m} --- 멀티사인 응답·Bode 통합 분석}]{../srcs/week3/multisine_analysis.m}
+
+\subsubsection{\texttt{multisine\_toolbox\_response.m}}
+MATLAB Control System Toolbox의 \texttt{lsim}을 직접 사용하여
+멀티사인 돌풍에 대한 응답을 검증한다.
+
+\lstinputlisting[caption={\texttt{multisine\_toolbox\_response.m} --- Toolbox 기반 멀티사인 응답}]{../srcs/week3/multisine_toolbox_response.m}
+
+%----------------------------------------------------------------------------------------
+%	WEEK 4 — Linear vs. nonlinear spring comparison
+%----------------------------------------------------------------------------------------
+\subsection{4주차: 선형·비선형 스프링 거동 비교 (MATLAB)}
+스프링에 3차 비선형 항(\(k_{nl}x^3\))을 추가한 경우와 선형 모델의 응답 차이를 탐구한다.
+FAA 이산 돌풍 입력과 멀티사인 입력에 대해 \texttt{ode45}로 수치적분하고,
+등가 루트 굽힘 모멘트를 지표로 선형·비선형 시스템을 정량 비교한다.
+
+\subsubsection{\texttt{impulse\_function\_generator.m}}
+FAA 14 CFR \S25.341(a) 이산 조율 돌풍(1-cosine 파형)을 생성하는 함수.
+돌풍 구배 \(H\)를 스윕하여 최대 응답을 유발하는 임계 \(H\)를 탐색하고 결과를 출력한다.
+
+\lstinputlisting[caption={\texttt{impulse\_function\_generator.m} --- FAA 이산 돌풍 생성}]{../srcs/week4/impulse_function_generator.m}
+
+\subsubsection{\texttt{multisine\_function\_generator.m}}
+3주차와 동일한 Schroeder 위상 멀티사인 생성기의 4주차 복사본.
+\texttt{nonlinear\_response.m}이 멀티사인 입력을 구성할 때 호출한다.
+
+\lstinputlisting[caption={\texttt{multisine\_function\_generator.m} (4주차) --- Schroeder 멀티사인 생성}]{../srcs/week4/multisine_function_generator.m}
+
+\subsubsection{\texttt{nonlinear\_response.m}}
+\texttt{wing\_nl.mat}을 불러와 비선형 스프링 운동방정식을 \texttt{ode45}로 수치 적분한다.
+입력 인덱스로 임펄스·멀티사인·계단·돌풍 생성기를 선택할 수 있으며,
+초기 변위 및 스프링 상수를 파라미터로 지정한다.
+
+\lstinputlisting[caption={\texttt{nonlinear\_response.m} --- 비선형 스프링 시간 응답 (ode45)}]{../srcs/week4/nonlinear_response.m}
+
+\subsubsection{\texttt{impulse\_all.m}}
+선형(\texttt{lsim})과 비선형(\texttt{ode45}) 모델에 동일한 임펄스·멀티사인 돌풍을 가하여
+플런지·피치 응답을 나란히 비교하는 종합 스크립트.
+
+\lstinputlisting[caption={\texttt{impulse\_all.m} --- 선형·비선형 임펄스 응답 비교}]{../srcs/week4/impulse_all.m}
+
+\subsubsection{\texttt{moment\_response.m}}
+날개 루트 굽힘 모멘트 \(M_b = L \cdot \int_0^L h(x)\,dx\) 의 등가 척도를
+임펄스·멀티사인 입력 모두에 대해 선형·비선형 두 경우로 계산하고 출력한다.
+
+\lstinputlisting[caption={\texttt{moment\_response.m} --- 등가 루트 굽힘 모멘트}]{../srcs/week4/moment_response.m}
+
+\subsubsection{\texttt{result\_plot.m}}
+4주차 해석 전체를 요약하는 \(5\times2\) 서브플롯 종합 그래프를 생성한다.
+임펄스·멀티사인 각 입력에 대해 플런지, 피치, 등가 굽힘 모멘트를 열로 배치하고
+선형(파란색)·비선형(주황색) 응답을 겹쳐 표시한다.
+
+\lstinputlisting[caption={\texttt{result\_plot.m} --- 4주차 종합 결과 그래프}]{../srcs/week4/result_plot.m}
+
+%----------------------------------------------------------------------------------------
+%	WEEK 5 — Eigenvalue vs. velocity & flutter boundary
+%----------------------------------------------------------------------------------------
+\subsection{5주차: 속도에 따른 고유값 변화 및 플러터 경계 (MATLAB)}
+비행속도 \(U\)가 변함에 따라 시스템 행렬 \(\mathbf{A}(U)\)의 고유값이 이동하는 양상을
+root-locus로 추적하고, 무게중심--공력중심 간격 \(e_a\)에 따른 플러터 경계를 2D/3D로 시각화한다.
+
+\subsubsection{\texttt{root\_locus\_U.m}}
+속도 \(U\)를 근-영에서 최대값까지 스윕하면서 각 \(U\)에서 \(\mathbf{A}(U)\)의
+고유값을 계산하여 복소평면에 궤적을 그린다. 허수축(\(\mathrm{Re}=0\))을 넘는
+임계 속도가 플러터 속도 \(U_f\)로 표시된다.
+
+\lstinputlisting[caption={\texttt{root\_locus\_U.m} --- 속도에 따른 root-locus}]{../srcs/week5/root_locus_U.m}
+
+\subsubsection{\texttt{flutter\_vs\_d.m}}
+\(e_a\) 값을 변화시키면서 각각의 플러터 속도 \(U_f\)를 계산하여
+2D 선 그래프와 3D 안정성 곡면(\(\max\,\mathrm{Re}(\lambda)\) vs \((e_a, U)\))을 생성한다.
+플러터 경계를 최고 비행속도 이상으로 확보하기 위한 최적 \(e_a\) 설계 근거를 제공한다.
+
+\lstinputlisting[caption={\texttt{flutter\_vs\_d.m} --- 간격 $e_a$에 따른 플러터 경계}]{../srcs/week5/flutter_vs_d.m}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY

@@ -619,3 +619,4 @@ helpsearch/
 .revise_required/
 report*/
 # End of https://www.toptal.com/developers/gitignore/api/linux,visualstudiocode,julia,python,latex,c++
+fin_report/template.pdf

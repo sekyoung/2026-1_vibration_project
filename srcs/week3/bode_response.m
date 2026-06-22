@@ -42,4 +42,4 @@ set(gca,'XScale','log')
 xlabel('Frequency  [Hz]');  ylabel('Phase  [deg]')
 title('Bode Phase');  legend('Location','southwest');  
 grid on;
-exportgraphics(gcf, 'week3_bode_response.png', 'Resolution', 300)
+%exportgraphics(gcf, 'week3_bode_response.png', 'Resolution', 300)

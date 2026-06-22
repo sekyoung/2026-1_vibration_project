@@ -22,7 +22,7 @@ function flutter_vs_d()
 
 % ---- fixed parameters (match build_2dof / aero_terms in build_models.m) --
 m  = 1.5;     Ip = 0.0084;
-k  = 900.0;  cd = 1.0;     d_sp  = 0.22;  % d_sp = spring spacing (not CG-AC d!)
+k  = 5500.0;  cd = 1.0;     d_sp  = 0.22;  % d_sp = spring spacing (not CG-AC d!)
 
 rho = 1.225;  chord = 0.30;  span = 0.50;
 Clalpha = 6;  ea = 0.045;            % AC forward of elastic axis [m]
