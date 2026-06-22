@@ -82,7 +82,7 @@
 %	Model and state space definitions
 %----------------------------------------------------------------------------------------
 
-\section{시스템 모델 및 상태공간,전달함수 정의}
+\section{시스템 모델 및 상태공간 정의}
 \subsection{모델 간소화 및 자유도 축소}
 해석의 용이성과 자원의 한계를 고려하여 다음 가정 하에 진행하였다. 날개는 형상이
 변하지 않는 대칭,균일 구조이다; 이때 탄성에 의한 효과는 길이 방향만 고려하며, 날개의 길이는
@@ -115,7 +115,8 @@ steady한 상황의 미소 섭동(perturbation)에서 시스템은 선형시간�
     z = h +  x\theta
 \end{equation}
 해당 기준점 \(P\)에 대하여, 익형의 시작점을 기준으로 위 그림과 같이 공력중심,무게중심,중점 순으로 위치하며,기준점 \(P\)에 대하여
-\(P\)와 무게중심까지의 거리를 \(x_{cg}^{p}\)로, 공력중심까지의 거리를 \(x_{ac}^{p}\)로 정의한다.
+\(P\)와 무게중심까지의 거리를 \(x_{cg}^{p}\)로, 공력중심까지의 거리를 \(x_{ac}^{p}\)로 정의한다. 또한 무게중심과 공력중심 사이의 거리를
+\(d_{cg}^{ac}=x_{cg}^{p}-x_{ac}^{p}\)로 정의하며, 이는 뒤의 플러터 해석에서 핵심 설계변수로 쓰인다.
 
 \subsection{운동방정식 유도}
 약 3~4주차에 걸쳐서 아래의 운동방정식을 유도하였다. 질량 \(\mathbf M\),구조 감쇠 \(\mathbf C\),
@@ -247,9 +248,9 @@ $w_n$을 고정시키고 탐구를 해보면, 질량을 증가시키면 시스�
 마지막으로, 탐구 과정 도중, 위의 1DOF 모델은 아래 그림과 같이 상대적 저주파에서 공진현상을 보임을 알 수 있었다. 이로써 엔진의 과도한 idling이 연비는 아낄 수 있지만, 기체에
 가하는 피로로 인해 득보다 실이 더 클 수도 있다는 것을 알게 되었다.
 \subsection{날개의 로우패스 필터 특성과 공명현상(WEEK3)}
-3주차부터는 위에서 서술한 2DOF 모델을 활용하여 탐구를 진행하였다. 난기류는 그 모델에 따라 \textit{von Kármán,Dryden} turbulent model 등 다양한
-모델이 존재한다.\footnote{von-karman model:$\Phi_w(\omega)=\frac{\sigma_w^2 L_w}{\pi U}\,
-\frac{1+3\,(L_w\,\omega/U)^2}{\big[\,1+(L_w\,\omega/U)^2\,\big]^{2}}$ where $\sigma_w=1.5,L_w=1.0,a=1.339$} 
+3주차부터는 위에서 서술한 2DOF 모델을 활용하여 탐구를 진행하였다. 난기류는 그 모델에 따라 \textit{von Kármán, Dryden} turbulent model 등 다양한
+모델이 존재한다. 본 탐구에서는 유리함수 형태로 다루기 편한 Dryden 수직 성분 PSD를 사용하였다.\footnote{Dryden vertical PSD:$\Phi_w(\omega)=\frac{\sigma_w^2 L_w}{\pi U}\,
+\frac{1+3\,(L_w\,\omega/U)^2}{\big[\,1+(L_w\,\omega/U)^2\,\big]^{2}}$, $\sigma_w=1.5,\ L_w=1.0$} 
 이러한 모델에서 알 수 있는 특성으로는, 난기류는 저주파 부분에서 큰 진폭을 가지며,고주파 부분은 거의 존재하지 않는다는 부분을 확인 할 수 있었다.
 따라서 해당 근거에 따라서,아래 그림과 같이 날개가 로우패스 필터의 특성을 보이고,특정 주파수에서 진폭이 커지는 공진현상을 발견할 수 있었으므로,
 날개를 설계할때는 공명주파수를 너무 저주파는 아닌, 적당한 주파수 대역폭 사이에 잡아야 함을 알 수 있었다.해당 탐구에서는
@@ -276,21 +277,21 @@ $w_n$을 고정시키고 탐구를 해보면, 질량을 증가시키면 시스�
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/week5_flutter_vs_d_2D.png}
-        \caption{공력중심과 무게중심 사이 간격 \(e_a\)에 따른 속도와 flutter boundary사이의 관계}
+        \caption{공력중심과 무게중심 사이 간격 \(d_{cg}^{ac}\)에 따른 속도와 flutter boundary사이의 관계}
         \label{fig:flutter_boundary_w_d}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/week5_flutter_vs_d_3D.png}
-        \caption{공력중심과 무게중심 사이 간격 \(e_a\)에 따른 속도와 고유값 사이의 관계}
+        \caption{공력중심과 무게중심 사이 간격 \(d_{cg}^{ac}\)에 따른 속도와 고유값 사이의 관계}
     \end{subfigure}
     \caption{5주차 결과. 빨간색 네모는 시스템이 \cref{tab:params}일 때 시스템이 위치하는 곳이다.}
     \label{fig:week5}
 \end{figure}
 보이는 그림과 같이, 위의 값들은 날개의 진동분석을 위해 비교적 불안정한 위치에 설계된 날개 모델임을 알 수 있다. 이러한 불안정성은
 공력중심과 무게중심 사이의 간격을 일정 수준 줄임으로써\cref{fig:flutter_boundary_w_d}해소할 수 있음을 볼 수 있었다. 그리고 이렇게
-\(d\)를 바꾸었을 때에는, root locus의 모양또한 달라질 것이므로, 다시 해당 그래프를 그려서 flutter boundary 근처에서의 속도에 따른 고유값(\(\lambda\))를
+\(d_{cg}^{ac}\)를 바꾸었을 때에는, root locus의 모양또한 달라질 것이므로, 다시 해당 그래프를 그려서 flutter boundary 근처에서의 속도에 따른 고유값(\(\lambda\))를
 재조사하여 보다 안정적인 설계를 해야함 또한 알 수 있었다. 또한 위 경우에는 주파수 병합이 일어나는\footnote{두 모드가 동일한 고유진동수를 가지어,동시에 공진현상이 발생해 큰 피해를 주는 현상}, 
 동일한 속도에 대해서 두 고윳값의 허수부분이 동일한 현상이
 일어나지 않았지만, 다른 U에 대해서는 해당 경우가 발생할 수 있으므로, 이를 피해서 설계를 해야함을 알 수 있었다.
@@ -302,7 +303,7 @@ $w_n$을 고정시키고 탐구를 해보면, 질량을 증가시키면 시스�
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/week4_nl_moment_response.png}
     \caption{Impulse and multisine response of linear and nonlinear spring stiffness. velocity \(U\) is taken to
-        flutter boundary speed to emphasize its different behavior, and cubic term used here is 900. Others are same as above.}
+        flutter boundary speed to emphasize its different behavior;The cubic non-linear stiffness coefficient ($k_{nl}$) in $F_s = kx + k_{nl}x^3$ is set to \si{900}{\newton\per\cubic\metre}. Others are same as above.}
 \end{figure}
 보이는 바와 같이, 초기단계에서는 두개가 별 차이가 없으나, 시간이 갈수록 그 차이가 점점 커짐을 알 수 있다. 또한 선형에 비해 비선형에서 모멘트가 커지므로,
 비선형의 경우에서 피로 또는 항복응력 초과의 확률이 더 높음을 알 수 있다.하지만, 주기적으로 힘이 작용하는 sine함수와 달리
@@ -315,7 +316,7 @@ impulse와 같은, 단기적으로 힘이 작용하는 경우에는, 선형,비�
 \(k \approx \SI{5500}{\newton\per\metre}\)
 \item[3주차] 주파수 응답 공진 대역폭을 난류 저주파 공진주파수 밖으로 밀어내는 \(w_d\)
 \item[5주차] 플러터 한계를 최고 비행속도
-\(V_{\max}\) 이상으로 확보하기 위해 무게중심--탄성중심 간격 \(e_a\)  
+\(V_{\max}\) 이상으로 확보하기 위해 공력중심--무게중심 간격 \(d_{cg}^{ac}\)  
 \end{itemize}
 4주차에서 보였듯,지속적으로 몰아치는 드문 난기류의 경우를 제외한,임펄스,혹은 시간이 짧은 외부충격의 경우
 비선형 효과가 충분히 작아,선형효과만으로
@@ -330,8 +331,8 @@ impulse와 같은, 단기적으로 힘이 작용하는 경우에는, 선형,비�
         \toprule
         설계값               & 근거 (주차)                 & 권장 방향 / 값                          \\
         \midrule
-        간격 \(e_a\)             & 플러터 한계 (5주)            & \(d \le \SI{2.5203}{\centi\meter}\;(V_f=\qty{29.633}{m/s} > V_{\max} )\) \\
-        공진주파수\tablefootnote{위에 서술한 Von Karman식에 $V_f$값 대입시 값 감소가 뚜렷해지는 지점을 $w_{d,\mathrm{crit}}$로 지정하였다} \(w_d\)    & 로우패스 대역 (3주)          & \(w_d \geq \SI{13.55223}{\hertz}\)      \\
+        간격 \(d_{cg}^{ac}\)             & 플러터 한계 (5주)            & \(d_{cg}^{ac} \le \SI{2.5203}{\centi\meter}\;(V_f=\qty{29.633}{m/s} > V_{\max} )\) \\
+        공진주파수\tablefootnote{위에 서술한 Dryden PSD에 $V_f$값 대입시 값 감소가 뚜렷해지는 지점을 $w_{d,\mathrm{crit}}$로 지정하였다} \(w_d\)    & 로우패스 대역 (3주)          & \(w_d \geq \SI{13.55223}{\hertz}\)      \\
         강성\footnote{강성에 따라 공진주파수와 간격이 달라지나, 모두 위의 조건을 만족하면 자동으로 만족하는 것을 확인하였다.} \(k\)          & 질량--강성 trade-off (1·2주) & \(k \gtrsim \SI{5500}{\newton\per\metre}\) \\
         비선형 항             & 돌풍 응답 (4주)              & 순항조건에서 무시 가능                    \\
         \bottomrule
@@ -445,7 +446,7 @@ Moving the motion-dependent part to the left of \eqref{eq:struct-eom} defines th
 \textbf{aerodynamic stiffness} \(\mathbf K_a\), \textbf{aerodynamic damping} \(\mathbf C_a\), and \textbf{gust force vector} \(\mathbf F_g\):
 \begin{equation}
     \boxed{\ \mathbf K_a = \bar{q} S\, C_{l\alpha}\!
-        \begin{bmatrix} 0 & 1 \\ 0 & -e_a \end{bmatrix},\qquad
+        \begin{bmatrix} 0 & 1 \\ 0 & e_a \end{bmatrix},\qquad
         \mathbf C_a = \frac{\bar{q} S\, C_{l\alpha}}{U}\!
         \begin{bmatrix} 1 & 0 \\ -e_a & 0 \end{bmatrix},\qquad
         \mathbf F_g = \frac{\bar{q} S\, C_{l\alpha}}{U}\!
@@ -526,6 +527,7 @@ bending moment) are obtained by modifying \(\mathbf C_{\text{out}}\) and
 %----------------------------------------------------------------------------------------
 %	SOURCE CODE
 %----------------------------------------------------------------------------------------
+%\begin{comment}
 \section{소스코드}\label{sec:code}
 
 \subsection{저장소 구조}
@@ -533,6 +535,12 @@ bending moment) are obtained by modifying \(\mathbf C_{\text{out}}\) and
 \url{https://github.com/sekyoung/2026-1_vibration_project}\\[6pt]
 \noindent 주차별 분석 스크립트는 \texttt{srcs/} 아래 주차 폴더에,
 공통 유틸리티는 \texttt{srcs/} 루트에 위치한다.
+
+
+$\ast $본 부록에 수록된 MATLAB 및 Julia 소스코드는 프로젝트의 최종 권장 설계안(Table 2)을 바탕으로 시스템의 동적 거동 및 플러터 경계를 최종 
+검증(Validation)하기 위해 작성되었습니다. 따라서 앞선 주차별 Baseline 파라미터(Table 1)와 수치적 차이가 있거나 변수명이 일부 상이할 수 있으며, 
+이는 최종 검증 시뮬레이션을 위한 독립적인 하드코딩 결과물입니다.
+
 
 \begin{small}
 \begin{verbatim}
@@ -558,7 +566,7 @@ srcs/
  │    ├── nonlinear_response.m   % 비선형 적분 (ode45)
  │    └── result_plot.m
  └── week5/
-      ├── flutter_vs_d.m         % 스프링 간격 d에 따른 플러터 경계
+      ├── flutter_vs_d.m         % CG-AC 간격에 따른 플러터 경계
       └── root_locus_U.m         % 속도에 따른 root-locus
 \end{verbatim}
 \end{small}
@@ -756,7 +764,7 @@ FAA 14 CFR \S25.341(a) 이산 조율 돌풍(1-cosine 파형)을 생성하는 함
 %----------------------------------------------------------------------------------------
 \subsection{5주차: 속도에 따른 고유값 변화 및 플러터 경계 (MATLAB)}
 비행속도 \(U\)가 변함에 따라 시스템 행렬 \(\mathbf{A}(U)\)의 고유값이 이동하는 양상을
-root-locus로 추적하고, 무게중심--공력중심 간격 \(e_a\)에 따른 플러터 경계를 2D/3D로 시각화한다.
+root-locus로 추적하고, 무게중심--공력중심 간격 \(d_{cg}^{ac}\)에 따른 플러터 경계를 2D/3D로 시각화한다.
 
 \subsubsection{\texttt{root\_locus\_U.m}}
 속도 \(U\)를 근-영에서 최대값까지 스윕하면서 각 \(U\)에서 \(\mathbf{A}(U)\)의
@@ -766,12 +774,12 @@ root-locus로 추적하고, 무게중심--공력중심 간격 \(e_a\)에 따른 
 \lstinputlisting[caption={\texttt{root\_locus\_U.m} --- 속도에 따른 root-locus}]{../srcs/week5/root_locus_U.m}
 
 \subsubsection{\texttt{flutter\_vs\_d.m}}
-\(e_a\) 값을 변화시키면서 각각의 플러터 속도 \(U_f\)를 계산하여
-2D 선 그래프와 3D 안정성 곡면(\(\max\,\mathrm{Re}(\lambda)\) vs \((e_a, U)\))을 생성한다.
-플러터 경계를 최고 비행속도 이상으로 확보하기 위한 최적 \(e_a\) 설계 근거를 제공한다.
+무게중심--공력중심 간격 \(d_{cg}^{ac}\) 값을 변화시키면서(\(e_a\)는 고정) 각각의 플러터 속도 \(U_f\)를 계산하여
+2D 선 그래프와 3D 안정성 곡면(\(\max\,\mathrm{Re}(\lambda)\) vs \((d_{cg}^{ac}, U)\))을 생성한다.
+플러터 경계를 최고 비행속도 이상으로 확보하기 위한 최적 \(d_{cg}^{ac}\) 설계 근거를 제공한다.
 
-\lstinputlisting[caption={\texttt{flutter\_vs\_d.m} --- 간격 $e_a$에 따른 플러터 경계}]{../srcs/week5/flutter_vs_d.m}
-
+\lstinputlisting[caption={\texttt{flutter\_vs\_d.m} --- 간격 $d_{cg}^{ac}$에 따른 플러터 경계}]{../srcs/week5/flutter_vs_d.m}
+%\end{comment}
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------

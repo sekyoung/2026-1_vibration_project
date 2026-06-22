@@ -26,7 +26,7 @@ end
 
 function [qS, Ka, Ca, Fgust, aero] = aero_terms()
 aero.rho     = 1.225;   % air density          [kg/m^3]
-aero.U       = 12.74;    % freestream speed     [m/s]
+aero.U       = 29.6;    % freestream speed     [m/s]
 aero.chord   = 0.30;    % airfoil chord        [m]
 aero.span    = 0.50;    % section span         [m]
 aero.Clalpha = 6.0;    % lift-curve slope     [1/rad]

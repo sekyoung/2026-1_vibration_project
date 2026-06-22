@@ -46,7 +46,7 @@
 \usepackage{siunitx} % Provides the \SI{}{} and \si{} commands for typesetting technical/scientific SI units correctly
 \sisetup{
   round-mode = figures,
-  round-precision = 3 % Sets all numbers to 3 significant figures
+  round-precision = 3
 }
 \usepackage{amsmath} % Required for some math elements 
 \usepackage{tablefootnote} % Required for footnotes in tables
