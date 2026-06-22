@@ -78,3 +78,4 @@ xline(ft,'--','Color',[.6 .6 .6],'HandleVisibility','off')
 set(gca,'XScale','log')
 xlabel('f [Hz]');  ylabel('Phase [deg]');  title('BODE: phase');
 legend('Location','southwest');  grid on
+exportgraphics(gcf, 'week3_multisine_response.png', 'Resolution', 300)

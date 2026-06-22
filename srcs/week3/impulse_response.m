@@ -37,3 +37,4 @@ yline(0,'Color',[.7 .7 .7])
 xlabel('t  [s]');  ylabel('\theta  [deg\cdots]')
 title('Pitch')
 grid on
+exportgraphics(gcf, 'week3_impulse_response.png', 'Resolution', 300)

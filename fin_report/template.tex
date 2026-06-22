@@ -27,6 +27,7 @@
 \addbibresource{sample.bib} % Bibliography file (located in the same folder as the template)
 
 \usepackage{subcaption}
+\usepackage{siunitx}
 
 %----------------------------------------------------------------------------------------
 %	REPORT INFORMATION
@@ -171,19 +172,19 @@ $\mathbf{D}_{\text{tot}} = \mathbf{C} + \mathbf{C}_a$ 이다. $\ddot{\mathbf{q}}
 \toprule
 Symbol & Value & Symbol & Value\\
 \midrule
-$m$ & $1.5$ kg & $\rho$ & $1.225$ kg/m$^3$\\
-$I_p$ & $0.0084$ kg\,m$^2$ & $U$ & $10$ m/s\\
-$S$ & $0.0225$ kg\,m & $c_{\text{chord}}$ & $0.30$ m\\
-$k$ (each) & $900$ N/m & $b_{\text{span}}$ & $0.50$ m\\
-$c$ (each) & $1.0$ N\,s/m & $C_{l\alpha}$ & $6.0$ /rad\\
-$d$ & $0.22$ m & $e_a$ & $0.045$ m\\
+$m$ & \SI{1.5}{\kilogram} & $\rho$ & \SI{1.225}{\kilogram\per\cubic\metre}\\
+$I_p$ & \SI{0.0084}{\kilogram\metre\squared} & $U$ & \SI{10}{\metre\per\second}\\
+$S$ & \SI{0.0225}{\kilogram\metre} & $c_{\text{chord}}$ & \SI{0.30}{\metre}\\
+$k$ (each) & \SI{900}{\newton\per\metre} & $b_{\text{span}}$ & \SI{0.50}{\metre}\\
+$c$ (each) & \SI{1.0}{\newton\second\per\metre} & $C_{l\alpha}$ & \SI{6.0}{\per\radian}\\
+$d$ & \SI{0.22}{\metre} & $e_a$ & \SI{0.045}{\metre}\\
 \bottomrule
 \end{tabular}
 \end{table}
 \section{주차별 스토리텔링}
 \subsection{1주차}
 1주차에서 우리는 날개를 1DOF mass-damp-spring 시스템\footnote{$m\ddot{x}+c\dot{x}+kx = F$}으로 설계해보았다.센서 노이즈를 제거한 후, 여러 curve-fitting 알고리즘(Gradient Descent,Gauss-Newton etc)등을
-통해 수치해석적 기법을 통해, 적당한 수준으로 모델링이 이루어졌을 때, 그에 상응하는 여러 진동학적 상수를 얻을 수 있음을 알 수 있었다.\ref{fig:week1}
+통해 수치해석적 기법을 통해, 적당한 수준으로 모델링이 이루어졌을 때, 그에 상응하는 여러 진동학적 상수를 얻을 수 있음을 알 수 있었다.\cref{fig:week1}
 \begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
@@ -201,70 +202,56 @@ $d$ & $0.22$ m & $e_a$ & $0.045$ m\\
     \label{fig:week1}
 \end{figure}
 \subsection{2주차}
+2주차에서는 1주차에서 모델링된 모델을 통해 임의의 가진에 대한 시스템의 반응, 그리고 질량 변화에 따른 시스템 거동의 변화에 대해 살펴 보았다. 아래와 같이
+Diesel Rotary engine에 대한 진동에 의한 힘이 시스템에 전달 될 때 반응하는 거동을 살펴보면, 아래와 같이, 초반(transient)구간에서는 흥분현상으로 인해
+큰 진폭을 보였으나, 갈수록 정상상태로 진입하여, 엔진의 진동수와 일치해가는 현상을 발견할 수 있었다. \cite{mendes2008analysis}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.21\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/week2_only_displacement.png}
+        \caption{Displacement}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.21\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/week2_only_force.png}
+        \caption{Force}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.21\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/week2_total.png}
+        \caption{Total}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.21\textwidth}
+        \centering
+    \includegraphics[width=\textwidth]{Figures/week2_rpm_relative.png}
+    \caption{RPM에 따른 공진 응답}
+    \end{subfigure}
+    \caption{2주차 결과}
+    \label{fig:week2}
+\end{figure}
+또한, 스프링 강성이 감소함에 따라, 1DOF의 고유주파수식, $w_n = \sqrt{k/m}$에 따라, 고유주기가 증가하는 모습을 볼 수 있었으며, 진동의 진폭또한 증가하는 것을 확인
+할 수 있었다. 진폭이 증가하는 현상은 질량이 증가함에 따라 어느정도 감소하는 것을 알 수 있었다.이러한 관계(날개의 질량을 과도하게 줄이면 강성또한 낮아지며 진동으로 인한 피로가
+증가함)에서, 질량과 강성 사이에 최적의 경우를 찾아야 함을 알 수 있었고, 그것을 찾기 위해 Pareto frontier와 같은 최적화 기술이 쓰임을 알 수 있었다. 또한, 이러한 관계 속에서 항공기의
+연료가 탱크가 아닌 날개에 먼저 저장되는 이유도 경량화의 목적을 이루면서 날개쪽에 질량을 늘려, 피로를 줄이기 위함임을 유추 할 수 있었다. 마지막으로,
+탐구 과정 도중, 위의 1DOF 모델은 아래 그림과 같이 상대적 저주파에서 공진현상을 보임을 알 수 있었다. 이로써 엔진의 과도한 idling이 연비는 아낄 수 있지만, 기체에
+가하는 피로로 인해 득보다 실이 더 클 수도 있다는 것을 알게 되었다.
+\subsection{3주차}
+3주차부터는 위에서 서술한 2DOF 모델을 활용하여 탐구를 진행하였다. 난기류는 그 모델에 따라 \textit{von Kármán,Dryden} turbulent model 등 다양한
+모델이 존재한다. 이러한 모델에서 알 수 있는 특성으로는, 난기류는 저주파 부분에서 큰 진폭을 가지며,고주파 부분은 거의 존재하지 않는다는 부분을 확인 할 수 있었다.
+따라서 해당 근거에 따라서, 날개를 설계할때는 공명주파수를 너무 저주파는 아닌, 적당한 주파수 대역폭 사이에 잡아야 함을 알 수 있었다. 다만 해당 탐구에서는
+보다 더 확실한 날개의 로우패스 필터의 특성을 파악하기 위해, 여러개의 사인파로 이루어진 임의의 테스트 파형을 만들어서, 그것에 대한 주파수 반응을 나타내보았다.
 
+\begin{figure}[H] % [H] forces the figure to be placed exactly where it appears in the text
+	\centering % Horizontally center the figure
+	\includegraphics[width=\textwidth]{multisine_toolbox_response.png} % Include the figure
+	\captionsetup{justification=centering} % Centers this specific caption
+	\caption{Frequency response of sine waves with rms=1.5 }
+\end{figure}
 
-
-% \subsection{Definitions}\label{definitions} % Labels provide a point for referencing, in this case with \ref{definitions} to refer to this subsection number
-
-% \begin{description}
-% 	\item[Stoichiometry] The relationship between the relative quantities of substances taking part in a reaction or forming a compound, typically a ratio of whole integers.
-% 	\item[Atomic mass] The mass of an atom of a chemical element expressed in atomic mass units. It is approximately equivalent to the number of protons and neutrons in the atom (the mass number) or to the average number allowing for the relative abundances of different isotopes. 
-% \end{description} 
- 
-% %----------------------------------------------------------------------------------------
-% %	Frequency and Time response
-% %----------------------------------------------------------------------------------------
-
-% \section{Experimental Data}
-
-% \begin{tabular}{l l}
-% 	Mass of empty crucible & \SI{7.28}{\gram}\\ % Scientific/technical units are output using the \SI command, see the siunitx package documentation for more information on how to use this command
-% 	Mass of crucible and magnesium before heating & \SI{8.59}{\gram}\\
-% 	Mass of crucible and magnesium oxide after heating & \SI{9.46}{\gram}\\
-% 	Balance used & \#4\\
-% 	Magnesium from sample bottle & \#1
-% \end{tabular}
-
-% %----------------------------------------------------------------------------------------
-% %	OPtimum design
-% %----------------------------------------------------------------------------------------
-
-% \section{Sample Calculation}
-
-% \begin{tabular}{ll}
-% 	Mass of magnesium metal & = \SI{8.59}{\gram} - \SI{7.28}{\gram}\\
-% 	& = \SI{1.31}{\gram}\\
-% 	Mass of magnesium oxide & = \SI{9.46}{\gram} - \SI{7.28}{\gram}\\
-% 	& = \SI{2.18}{\gram}\\
-% 	Mass of oxygen & = \SI{2.18}{\gram} - \SI{1.31}{\gram}\\
-% 	& = \SI{0.87}{\gram}
-% \end{tabular}
-
-% Because of this reaction, the required ratio is the atomic weight of magnesium: \SI{16.00}{\gram} of oxygen as experimental mass of Mg: experimental mass of oxygen or $\frac{x}{1.31} = \frac{16}{0.87}$ from which, $M_{\ce{Mg}} = 16.00 \times \frac{1.31}{0.87} = 24.1 = \SI{24}{\gram\per\mole}$ (to two significant figures).
-
-% %----------------------------------------------------------------------------------------
-% %	RESULTS AND CONCLUSIONS
-% %----------------------------------------------------------------------------------------
-
-% \section{Results and Conclusions}
-
-% The atomic weight of magnesium is concluded to be \SI{24}{\gram\per\mol}, as determined by the stoichiometry of its chemical combination with oxygen. This result is in agreement with the accepted value.
-
-% \begin{figure}[H] % [H] forces the figure to be placed exactly where it appears in the text
-% 	\centering % Horizontally center the figure
-% 	\includegraphics[width=0.65\textwidth]{placeholder} % Include the figure
-% 	\caption{Figure caption.}
-% \end{figure}
-
-% %----------------------------------------------------------------------------------------
-% %	DISCUSSION
-% %----------------------------------------------------------------------------------------
-
-% \section{Discussion of Experimental Uncertainty}
-
-% The accepted value (periodic table) is \SI{24.3}{\gram\per\mole} \autocite{Smith:2022qr}. The percentage discrepancy between the accepted value and the result obtained here is 1.3\%. Because only a single measurement was made, it is not possible to calculate an estimated standard deviation (see \textcite{Smith:2021jd}).
-
-% The most obvious source of experimental uncertainty is the limited precision of the balance. Other potential sources of experimental uncertainty are: the reaction might not be complete; if not enough time was allowed for total oxidation, less than complete oxidation of the magnesium might have, in part, reacted with nitrogen in the air (incorrect reaction); the magnesium oxide might have absorbed water from the air, and thus weigh ``too much." Because the result obtained is close to the accepted value it is possible that some of these experimental uncertainties have fortuitously cancelled one another.
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
@@ -276,6 +263,8 @@ $d$ & $0.22$ m & $e_a$ & $0.045$ m\\
 %----------------------------------------------------------------------------------------
 \appendix
 %======================================================================
+\begin{landscape}
+    \begin{multicols}{2}
 \section{Structural Model from Energy}\label{sec:struct-model}
 %======================================================================
 
@@ -396,31 +385,32 @@ Collecting everything, the governing equation \eqref{eq:struct-eom} becomes
 = \mathbf F_g\, w_g(t).\ }
 \label{eq:eom}
 \end{equation}
-Compromise them all, then the matrix are shown as below.\ref{tab:matrices}
-\begin{table}[h]
-\centering
-\caption{System matrices ($\bar{q}S = \tfrac{1}{2}\rho U^2 c\,b$)}
-\label{tab:matrices}
-\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{ll}
-\toprule
-Matrix & Definition \\
-\midrule
-$\mathbf{M}$
-  & $\begin{bmatrix} m & S \\ S & I_p \end{bmatrix}$ \\[6pt]
-$\mathbf{C}$
-  & $\begin{bmatrix} 2c_d & 0 \\ 0 & \tfrac{1}{2}c_d d^2 \end{bmatrix}$,\quad
-    $\mathbf{C}_a = \dfrac{\bar{q}S\,C_{l\alpha}}{U}
-    \begin{bmatrix} 1 & 0 \\ -e_a & 0 \end{bmatrix}$ \\[6pt]
-$\mathbf{K}_s$
-  & $\begin{bmatrix} 2k & 0 \\ 0 & \tfrac{1}{2}k d^2 \end{bmatrix}$,\quad
-    $\mathbf{K}_a = \bar{q}S\,C_{l\alpha}
-    \begin{bmatrix} 0 & 1 \\ 0 & -e_a \end{bmatrix}$ \\[6pt]
-$\mathbf{F}_g$
-  & $\dfrac{\bar{q}S\,C_{l\alpha}}{U}\begin{bmatrix} -1 \\ e_a \end{bmatrix}$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+% Compromise them all, then the matrix are shown as below.\cref{tab:matrices}
+% \begin{table}[h]
+% \centering
+% \caption{System matrices ($\bar{q}S = \tfrac{1}{2}\rho U^2 c\,b$)}
+% \label{tab:matrices}
+% \renewcommand{\arraystretch}{1.4}
+% \begin{tabular}{ll}
+% \toprule
+% Matrix & Definition \\
+% \midrule
+% $\mathbf{M}$
+%   & $\begin{bmatrix} m & S \\ S & I_p \end{bmatrix}$ \\[6pt]
+% $\mathbf{C}$
+%   & $\begin{bmatrix} 2c_d & 0 \\ 0 & \tfrac{1}{2}c_d d^2 \end{bmatrix}$,\quad
+%     $\mathbf{C}_a = \dfrac{\bar{q}S\,C_{l\alpha}}{U}
+%     \begin{bmatrix} 1 & 0 \\ -e_a & 0 \end{bmatrix}$ \\[6pt]
+% $\mathbf{K}_s$
+%   & $\begin{bmatrix} 2k & 0 \\ 0 & \tfrac{1}{2}k d^2 \end{bmatrix}$,\quad
+%     $\mathbf{K}_a = \bar{q}S\,C_{l\alpha}
+%     \begin{bmatrix} 0 & 1 \\ 0 & -e_a \end{bmatrix}$ \\[6pt]
+% $\mathbf{F}_g$
+%   & $\dfrac{\bar{q}S\,C_{l\alpha}}{U}\begin{bmatrix} -1 \\ e_a \end{bmatrix}$ \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
 %----------------------------------------------------------------------------------------
-
+    \end{multicols}
+\end{landscape}
 \end{document}

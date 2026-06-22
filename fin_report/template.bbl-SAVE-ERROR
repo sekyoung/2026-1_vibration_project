@@ -1,0 +1,152 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{anderson2023fundamentals}{book}{}
+      \name{author}{2}{}{%
+        {{hash=0d7080711db4e5e2feabab32a6988a32}{%
+           family={Anderson},
+           familyi={A\bibinitperiod},
+           given={J.D.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d7921dc542c75071e97eb73ab85910d8}{%
+           family={Cadou},
+           familyi={C\bibinitperiod},
+           given={C.P.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {McGraw Hill}%
+      }
+      \strng{namehash}{64d903a58cad4a7b7a3050cfc1521118}
+      \strng{fullhash}{64d903a58cad4a7b7a3050cfc1521118}
+      \strng{bibnamehash}{64d903a58cad4a7b7a3050cfc1521118}
+      \strng{authorbibnamehash}{64d903a58cad4a7b7a3050cfc1521118}
+      \strng{authornamehash}{64d903a58cad4a7b7a3050cfc1521118}
+      \strng{authorfullhash}{64d903a58cad4a7b7a3050cfc1521118}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781266076442}
+      \field{series}{McGraw-Hill series in aeronautical and aerospace engineering}
+      \field{title}{Fundamentals of Aerodynamics}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://books.google.co.kr/books?id=PUV7zwEACAAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.co.kr/books?id=PUV7zwEACAAJ
+      \endverb
+    \endentry
+    \entry{hodges2011introduction}{book}{}
+      \name{author}{2}{}{%
+        {{hash=cdd1819c86cfa0c8a478cb7d8e35fcc7}{%
+           family={Hodges},
+           familyi={H\bibinitperiod},
+           given={D.H.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=c856fd20f9b9b6c954f106200fdc86f2}{%
+           family={Pierce},
+           familyi={P\bibinitperiod},
+           given={G.A.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{db7a56bce78c4fdeb3ec58f45e6d5979}
+      \strng{fullhash}{db7a56bce78c4fdeb3ec58f45e6d5979}
+      \strng{bibnamehash}{db7a56bce78c4fdeb3ec58f45e6d5979}
+      \strng{authorbibnamehash}{db7a56bce78c4fdeb3ec58f45e6d5979}
+      \strng{authornamehash}{db7a56bce78c4fdeb3ec58f45e6d5979}
+      \strng{authorfullhash}{db7a56bce78c4fdeb3ec58f45e6d5979}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781139499927}
+      \field{series}{Cambridge Aerospace Series}
+      \field{title}{Introduction to Structural Dynamics and Aeroelasticity}
+      \field{year}{2011}
+      \verb{urlraw}
+      \verb https://books.google.co.kr/books?id=_UCVJ6RY-vsC
+      \endverb
+      \verb{url}
+      \verb https://books.google.co.kr/books?id=_UCVJ6RY-vsC
+      \endverb
+    \endentry
+    \entry{aircraft_control_and_simulation}{inbook}{}
+      \name{author}{3}{}{%
+        {{hash=34647e92206433d5a14e99ba6b123b1c}{%
+           family={Stevens},
+           familyi={S\bibinitperiod},
+           given={Brian\bibnamedelima L.},
+           giveni={B\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=e8b2d327ef78200b45c2158053b96ca0}{%
+           family={Lewis},
+           familyi={L\bibinitperiod},
+           given={Frank\bibnamedelima L.},
+           giveni={F\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=288ddf0ed32d5d6023ac50b46ba35808}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Eric\bibnamedelima N.},
+           giveni={E\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley & Sons, Ltd}%
+      }
+      \strng{namehash}{5b9497ae43b23f71d529b5b0877c7fe1}
+      \strng{fullhash}{5b9497ae43b23f71d529b5b0877c7fe1}
+      \strng{bibnamehash}{5b9497ae43b23f71d529b5b0877c7fe1}
+      \strng{authorbibnamehash}{5b9497ae43b23f71d529b5b0877c7fe1}
+      \strng{authornamehash}{5b9497ae43b23f71d529b5b0877c7fe1}
+      \strng{authorfullhash}{5b9497ae43b23f71d529b5b0877c7fe1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Summary This chapter focuses on the equations of motion of a rigid vehicle (aircraft), moving over the rotating Earth. For this purpose, the vector analysis of classical mechanics is used to set up the equations of motion, and matrix algebra to describe operations with coordinate systems; the concepts from geodesy, gravitation, and navigation are also highlighted. The chapter deals with kinematic equations for a time-varying orientation, specifically, the relationship between the derivative of a translational vector and angular velocity expressed as a vector. This is followed by a discussion on the relationship of the Euler angle derivatives to the angular velocity vector, expressed in state-space form. By using the vehicle center of mass (cm) as a reference point, the rotational dynamics of the aircraft can be separated from the translational dynamics; a body-fixed coordinate system, is used with its origin at the cm to compute moments about the origin.}
+      \field{booktitle}{Aircraft Control and Simulation: Dynamics, Controls Design, and Autonomous Systems}
+      \field{chapter}{1}
+      \field{isbn}{9781119174882}
+      \field{title}{The Kinematics and Dynamics of Aircraft Motion}
+      \field{year}{2015}
+      \field{pages}{1\bibrangedash 62}
+      \range{pages}{62}
+      \verb{doi}
+      \verb https://doi.org/10.1002/9781119174882.ch1
+      \endverb
+      \verb{eprint}
+      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781119174882.ch1
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/9781119174882.ch1
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/9781119174882.ch1
+      \endverb
+      \keyw{aircraft motion,coordinate systems,Earth's gravity,Euler angles,geodesy,matrix operations,rigid-body dynamics,rotational kinematics,translational kinematics,vector operations}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

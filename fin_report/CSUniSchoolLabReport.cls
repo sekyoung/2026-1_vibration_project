@@ -50,6 +50,12 @@
 \usepackage{kotex} % Required for Korean characters
 \usepackage{caption} % Add this to your preamble
 \usepackage{booktabs} % Required for better horizontal rules in tables
+\usepackage{textcomp} % Provides extra symbols, such as \textdegree for the degree symbol
+\usepackage{hyperref} % Required for hyperlinks in the PDF
+\usepackage{cleveref} % Required for clever referencing of figures, tables, etc.
+
+\usepackage{pdflscape} % Rotates the page horizontally in the PDF reader
+\usepackage{multicol}   % Allows flexible multi-column formatting
 %----------------------------------------------------------------------------------------
 %	MARGINS
 %----------------------------------------------------------------------------------------
