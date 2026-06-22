@@ -1,3 +1,0 @@
-- [x] Impulse modelling based on FAA/EASA airworthness certificate with vertical gust wind.
-- [x] Change spring constant to be nonlinear, in format of $F = k_1x+k_3x^3$
-- [x] get frequency and impulse response.

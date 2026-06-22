@@ -59,12 +59,12 @@
 %\begin{abstract}
 %	Abstract text
 %\end{abstract}
-\section{개요}
-항공기의 날개는 이륙과 착륙과정에서 가장 큰 스트레스를 겪는다.하지만 이를 제외하고도, 순항과정에서도 여러 요인에 의하여
-지속적으로 스트레스를 받으며 항공기가 최대효율을 내며 비행하는것을 제한한다.
-이 중 연비에 가장 큰 영향을 미치는 순항속도에 있어서,그것을 제한하는 첫번째 요소인 Flutter 현상을 해결하는 것이 연비 향상에 큰 도움이 된다.
-이를 공력탄성학적인 시선에서 접근하여, 항공기 날개의 공력탄성학적 특성을 해석하고, Flutter 현상을 예측하여, 
-항공기 날개를 위한 최소한의 디자인을 제시해보고자 한다.
+% \section{개요}
+% 항공기의 날개는 이륙과 착륙과정에서 가장 큰 스트레스를 겪는다.하지만 이를 제외하고도, 순항과정에서도 여러 요인에 의하여
+% 지속적으로 스트레스를 받으며 항공기가 최대효율을 내며 비행하는것을 제한한다.
+% 이 중 연비에 가장 큰 영향을 미치는 순항속도에 있어서,그것을 제한하는 첫번째 요소인 Flutter 현상을 해결하는 것이 연비 향상에 큰 도움이 된다.
+% 이를 공력탄성학적인 시선에서 접근하여, 항공기 날개의 공력탄성학적 특성을 해석하고, Flutter 현상을 예측하여, 
+% 항공기 날개를 위한 최소한의 디자인을 제시해보고자 한다.
 %----------------------------------------------------------------------------------------
 %	Model and state space definitions
 %----------------------------------------------------------------------------------------
@@ -73,9 +73,9 @@
 \subsection{모델 간소화 및 자유도 축소}
 해당 탐구에서는 해석을 용이하게 하기위한,그리고  자원의 한계로 다음과 같은 가정하에서 프로젝트를 진행하였다.
 \begin{enumerate}
-	\item 날개는 대칭적이고 균일한 구조이다
-	\item 날개의 길이는 무한하다. Wing vortex 등 유한한 길이의 날개로 인한 효과는 무시하며, 2차원 익형 해석으로 진행한다.
-	\item 날개의 길이 방향으로 인한 탄성학적 효과는 익형에 달려있는 두개의 스프링,두개의 댐퍼로 근사할 수 있다 
+	\item 날개는 대칭적이고 균일한 구조이다. 익형의 단면은 형상이 변하지 않는다.(길이 방향 탄성효과만 존재하고, 남은 두개의 방향으로의 변형은 무시한다)
+	\item 날개의 길이는 무한하다. Wing vortex 등 유한한 길이의 날개로 인한 효과는 무시하며, 2차원 익형 단면\footnote{airfoil cross-section} 해석으로 진행한다.
+	\item 날개의 길이 방향으로 인한 탄성학적 효과는 익형에 달려있는 두개의 스프링,두개의 댐퍼(viscous damper)로 근사할 수 있다 
 	\item 해당 가상 실험은 풍동 내부에서 진행된다고 가정하며,실제 날개와의 유사성은 Dynamic Similarity에 의해 보장된다.
 	\item 순항고도 등, 비교적 steady한 상황에서 발생하는 진동에 대하여 탐구한다.해당 가정에서, 미소한 섭동(perturbation)은
 	선형화로 근사될 수 있으므로, 시스템은 선형시간불변성(LTI)으로 간주될 수 있다\cite{aircraft_control_and_simulation}.
@@ -83,8 +83,8 @@
 \end{enumerate}
 
 \subsection{모델}
-날개의 익형(airfoil)이 일정하기 때문에 Chord length \(c_{chord}\)는 상수다. 그리고 무한히 긴 날개에서, 동체에서 \(b\)만큼 떨어진 날개의 단면에 대한
-등가모형을 아래와 같이 가정하였다.\cite{hodges2011introduction}
+날개의 거동학을 알기 위해 풍동 안에서 실험이 이루어진다고 하면, 날개의 익형(airfoil)이 일정하기 때문에 Chord length \(c_{chord}\)는 상수다. 그리고 무한히 긴 날개에서, 동체에서 \(b\)만큼 떨어진 날개의 단면에 대한
+등가모형을 아래와 같은 \textit{strut-supported} wind tunnel model로 가정할 수 있다.\cite{hodges2011introduction}
 \begin{figure}[H] % [H] forces the figure to be placed exactly where it appears in the text
 	\centering % Horizontally center the figure
 	\includegraphics[width=0.65\textwidth]{model_diagram.png} % Include the figure
@@ -108,7 +108,7 @@ z = h +  x\theta
 \(P\)와 무게중심까지의 거리를 \(x_{cg}^{p}\)로, 공력중심까지의 거리를 \(x_{ac}^{p}\)로 정의한다.
 
 \subsection{운동방정식 유도}
-약 3~4주차에 걸쳐서 아래의 식을 유도하였다. 자세한 유도과정은 부록 \ref{sec:struct-model}에 수록하였다.
+약 3~4주차에 걸쳐서 아래의 식을 유도하였다. 자세한 유도과정은 부록 \cref{sec:struct-model}에 수록하였다.
 \begin{equation}
 \boxed{\ \mathbf M\,\ddot{\mathbf q}
 + \big(\mathbf C + \mathbf C_a\big)\,\dot{\mathbf q}
@@ -198,7 +198,7 @@ Symbol & Value & Symbol & Value\\
         \includegraphics[width=\textwidth]{Figures/week1_change_damping.png}
         \caption{Week 1 Change Damping}
     \end{subfigure}
-    \caption{X = 0.18813,\(\zeta\)=0.01896,\(w_n\) = 19.9328, \(\phi\)=0.1525}
+    \caption{$x(t) = Xe^{-\zeta w_{n}t}\cos(\sqrt{1-\zeta^2}w_{n}t-ϕ)$\\X = 0.18813,\(\zeta\)=0.01896,\(w_n\) = 19.9328, \(\phi\)=0.1525}
     \label{fig:week1}
 \end{figure}
 \subsection{2주차}
@@ -268,6 +268,7 @@ Diesel Rotary engine에 대한 진동에 의한 힘이 시스템에 전달 될 �
         \centering
         \includegraphics[width=\textwidth]{Figures/week5_flutter_vs_d_2D.png}
         \caption{공력중심과 무게중심 사이 간격 $d$에 따른 속도와 flutter boundary사이의 관계}
+        \label{fig:flutter_boundary_w_d}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\textwidth}
@@ -275,12 +276,31 @@ Diesel Rotary engine에 대한 진동에 의한 힘이 시스템에 전달 될 �
         \includegraphics[width=\textwidth]{Figures/week5_flutter_vs_d_3D.png}
         \caption{공력중심과 무게중심 사이 간격 $d$에 따른 속도와 고유값 사이의 관계}
     \end{subfigure}
-    \caption{5주차 결과. 빨간색 네모는 $U=12$일 때 시스템이 위치하는 곳이다.}
+    \caption{5주차 결과. 빨간색 네모는 시스템이 \cref{tab:params}일 때 시스템이 위치하는 곳이다.}
     \label{fig:week5}
 \end{figure}
+보이는 그림과 같이, 위의 값들은 날개의 진동분석을 위해 비교적 불안정한 위치에 설계된 날개 모델임을 알 수 있다. 이러한 불안정성은
+공력중심과 무게중심 사이의 간격을 일정 수준 줄임으로써\cref{fig:flutter_boundary_w_d}해소할 수 있음을 볼 수 있었다. 그리고 이렇게
+$d$를 바꾸었을 때에는, root locus의 모양또한 달라질 것이므로, 다시 해당 그래프를 그려서 flutter boundary 근처에서의 속도에 따른 고유값($\lambda$)를
+재조사하여 보다 안정적인 설계를 해야함 또한 알 수 있었다.
 \subsection{week4}
 위에서는 선형적인 경우만을 다루었으나, week4에서는 용수철이 비선형적으로 거동할 경우에 대해 탐구하였다. 비선형 시스템에서는
-위와 같이 행렬 형태의 state space로 근사시키지 못해 계산에 큰 어려움이 있다.
+위와 같이 행렬 형태의 state space로 표현하지 못하여 bode,root locus와 같은 거동의 해석이 선형시스템만큼 쉽지 않다. 해서
+해당 탐구에서는 간단하게 impulse,multisine 함수를 수치해석기법(ode45)를 사용하여 선형과 비선형 거동의 차이를 아래와 같이 보였다.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/week4_nl_moment_response.png}
+    \caption{Impulse and multisine response of linear and nonlinear spring stiffness. velocity $U$is taken to
+    flutter boundary speed to emphasize its difference behavior, and cubic term used here is 900. others are same as above.}
+\end{figure}
+보이는 바와 같이, 초기단계에서는 두개가 별 차이가 없으나, 시간이 갈수록 그 차이가 점점 커짐을 알 수 있다. 하지만, 주기적으로 힘이 작용하는 sine함수와 달리
+impulse와 같은, 단기적으로 힘이 작용하는 경우에는, 선형,비선형 스프링의 차이가 별로 없다는 점을 미뤄보아, 항공기의 속도가 빠르게 유지되어, 난기류 같은
+순간적인 impulse로 작용하는 힘만 존재한다고 가정하면, 충분히 비선형 시스템은 선형 시스템으로 취급되어 해석을 할 수 있음을 알 수 있었다.
+\section{결론}
+약 5주차에 걸쳐서 1DOF 모델에서 데이터를 역추적하여 모델에서의 등가 물리량 등을 구하고, 질량과 강성 사이에는
+trade-off가 있음을 알 수 있었다. 또한 2DOF 모델에서 날개의 로우패스 필터, 여러 물리량의 변화에 따른 고유값들의 변화를
+살펴보고,순항과정 중 특정한 상황에서는 비선형 모델을 선형 모델로 충분히 근사할 수 있음을 보였다.
+또 뭐써야하지? 아 근데 공간이 없는데 하하핳
 %----------------------------------------------------------------------------------------
 %	Appendix
 %----------------------------------------------------------------------------------------
@@ -311,8 +331,8 @@ Writing \(T=\tfrac12\dot{\mathbf q}^{\mathsf T}\mathbf M\dot{\mathbf q}\) with
 \boxed{\;\mathbf M=\begin{bmatrix} m & S\\[2pt] S & I_p \end{bmatrix}\;}
 \label{eq:M}
 \end{equation}
-The off-diagonal \(S\) represents the \emph{inertial coupling}: if the c.g. is not at \(P\), plunge and
-pitch exchange energy. Setting \(x_{\mathrm{cg}}^p=0\) decouples them.
+% The off-diagonal \(S\) represents the \emph{inertial coupling}: if the c.g. is not at \(P\), plunge and
+% pitch exchange energy. Setting \(x_{\mathrm{cg}}^p=0\) decouples them.
 
 \subsection{Stiffness Matrix --- Spring Potential Energy}
 The two springs sit at \(\xi=-d/2\) (front) and \(\xi=+d/2\) (rear). Their deflections are
@@ -329,7 +349,7 @@ The cross terms \(\mp d\,h\theta\) cancel because \(P\) is the midpoint. With
 \boxed{\;\mathbf K_s=\begin{bmatrix} 2k & 0\\[2pt] 0 & \tfrac12 k d^2 \end{bmatrix}\;}
 \label{eq:Ks}
 \end{equation}
-i.e., plunge stiffness \(2k\) and pitch stiffness \(\tfrac12 kd^2\).
+% i.e., plunge stiffness \(2k\) and pitch stiffness \(\tfrac12 kd^2\).
 
 \subsection{Damping Matrix --- Rayleigh Dissipation}
 The dampers act in parallel with the springs, so the Rayleigh dissipation function is
@@ -339,8 +359,8 @@ identical in form to \eqref{eq:V} with \(k\!\to\!c\) and \(z\!\to\!\dot z\):
 \boxed{\;\mathbf C=\begin{bmatrix} 2c & 0\\[2pt] 0 & \tfrac12 c d^2 \end{bmatrix}\;}
 \label{eq:C}
 \end{equation}
-This term is essential: without it, the resonance peaks would be infinite; a few percent of critical
-damping makes them finite and realistic.
+% This term is essential: without it, the resonance peaks would be infinite; a few percent of critical
+% damping makes them finite and realistic.
 
 \subsection{Structural Equations of Motion}
 Lagrange's equations,
@@ -365,7 +385,7 @@ L = \bar{q} S\, C_{l\alpha}\Big(\theta +\frac{\dot{h}}{U} + \frac{w_g}{U}\Big),
 \qquad \bar{q} S = \tfrac{1}{2}\rho U^2 c\, b
 \label{eq:lift}
 \end{equation}
-For a NACA~2412 airfoil, \(C_{l\alpha}\approx 2\pi\), and \(\bar{q} S\) is the dynamic
+For a NACA~2412 airfoil, \(C_{l\alpha} = \text{Const} (\approx 2\pi)\), and \(\bar{q} S\) is the dynamic
 pressure multiplied by the planform area.\footnote{The unsteady Theodorsen/Sears
 corrections are omitted. this slightly overestimates the
 peaks but is appropriate for the present reduced-order model.}

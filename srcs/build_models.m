@@ -26,7 +26,7 @@ end
 
 function [qS, Ka, Ca, Fgust, aero] = aero_terms()
 aero.rho     = 1.225;   % air density          [kg/m^3]
-aero.U       = 10.0;    % freestream speed     [m/s]
+aero.U       = 12.74;    % freestream speed     [m/s]
 aero.chord   = 0.30;    % airfoil chord        [m]
 aero.span    = 0.50;    % section span         [m]
 aero.Clalpha = 6.0;    % lift-curve slope     [1/rad]
@@ -81,17 +81,17 @@ end
 
 function build_nl(here)
 % Per-spring model with cubic stiffness (cubic lives in the solver only).
-m  = 2.0;      % section mass                 [kg]
-Ip = 0.1;     % pitch inertia                [kg*m^2]
-S  = 0.015;    % static unbalance             [kg*m]
-d  = 0.25;     % distance between springs     [m]
+m  = 1.5;      % section mass                 [kg]
+Ip = 0.0084;     % pitch inertia                [kg*m^2]
+S  = 0.0225;    % static unbalance             [kg*m]
+d  = 0.22;     % distance between springs     [m]
 
-k1   = 200.0;  % spring 1 stiffness           [N/m]
-k2   = 200.0;  % spring 2 stiffness           [N/m]   !(set != k1 for h-theta coupling)
-knl1 = 5e4;    % spring 1 cubic coefficient   [N/m^3] !(set > 0 for hardening)
-knl2 = 5e4;    % spring 2 cubic coefficient   [N/m^3]
-c1   = 3.0;    % damper 1 coefficient         [N*s/m]
-c2   = 3.0;    % damper 2 coefficient         [N*s/m]
+k1   = 900.0;  % spring 1 stiffness           [N/m]
+k2   = 900.0;  % spring 2 stiffness           [N/m]   !(set != k1 for h-theta coupling)
+knl1 = 1000;    % spring 1 cubic coefficient   [N/m^3] !(set > 0 for hardening)
+knl2 = 1000;    % spring 2 cubic coefficient   [N/m^3]
+c1   = 1;    % damper 1 coefficient         [N*s/m]
+c2   = 1;    % damper 2 coefficient         [N*s/m]
 
 r1 = +d/2;     % spring/damper 1 moment arm   [m]
 r2 = -d/2;     % spring/damper 2 moment arm   [m]
