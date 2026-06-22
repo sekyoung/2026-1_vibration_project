@@ -7,12 +7,12 @@ function root_locus_U()
 % a branch crosses the imaginary axis (Re = 0, Im ≠ 0), and saves a plot.
 
 % ---- physical parameters (must match build_2dof / aero_terms) ----------
-m  = 2.0;     Ip = 0.01;    S  = 0.015;
-k  = 1200.0;  cd = 3.0;     d  = 0.25;
+m  = 1.5;     Ip = 0.0084;    S  = 0.0225;
+k  = 900.0;  cd = 1.0;     d  = 0.22;
 
 rho     = 1.225;   chord   = 0.30;
-span    = 0.50;    Clalpha = 2*pi;
-ea      = 0.05;
+span    = 0.50;    Clalpha = 6;
+ea      = 0.045;
 U_nom   = 12.0;    % nominal speed from aero_terms [m/s]
 
 M_mat    = [m,   S;   S,  Ip];
@@ -137,7 +137,6 @@ legend('Location', 'best', 'FontSize', 9);
 
 here = fileparts(mfilename('fullpath'));
 out  = fullfile(here, 'root_locus_U.png');
-saveas(gcf, out);
+exportgraphics(gcf, out, 'Resolution', 300);
 fprintf('Figure saved: %s\n', out);
-
 end
