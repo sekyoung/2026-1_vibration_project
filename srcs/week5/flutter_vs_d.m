@@ -1,3 +1,4 @@
+%function [d_cm,U_fl] = flutter_vs_d()
 function flutter_vs_d()
 % Flutter speed and stability surface as a function of CG-to-AC distance d.
 %
@@ -156,10 +157,10 @@ title({'Stability surface over (CG-to-AC distance  d,  speed  U)', ...
 view([-42, 28]);
 
 % ---- save ---------------------------------------------------------------
-here = fileparts(mfilename('fullpath'));
-exportgraphics(f1, fullfile(here, 'flutter_vs_d_2D.png'),'Resolution', 300);
-exportgraphics(f2, fullfile(here, 'flutter_vs_d_3D.png'),'Resolution', 300);
-fprintf('Saved: flutter_vs_d_2D.png  and  flutter_vs_d_3D.png\n');
+%here = fileparts(mfilename('fullpath'));
+%exportgraphics(f1, fullfile(here, 'flutter_vs_d_2D.png'),'Resolution', 300);
+%exportgraphics(f2, fullfile(here, 'flutter_vs_d_3D.png'),'Resolution', 300);
+%fprintf('Saved: flutter_vs_d_2D.png  and  flutter_vs_d_3D.png\n');
 end
 
 % =========================================================================

@@ -47,7 +47,7 @@ function build_2dof(here)
 m  = 1.5;      % section mass                 [kg]
 Ip = 0.0084;     % pitch inertia                [kg*m^2]
 S  = 0.0225;    % static unbalance             [kg*m]
-k  = 900;   % each spring stiffness        [N/m]
+k  = 5;   % each spring stiffness        [N/m]
 cd = 1.0;      % each damper coefficient      [N*s/m]
 d  = 0.22;     % distance between springs     [m]
 

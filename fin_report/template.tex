@@ -26,9 +26,6 @@
 
 \addbibresource{sample.bib} % Bibliography file (located in the same folder as the template)
 
-\usepackage{subcaption}
-\usepackage{siunitx}
-
 %----------------------------------------------------------------------------------------
 %	REPORT INFORMATION
 %----------------------------------------------------------------------------------------
@@ -72,15 +69,14 @@
 \section{시스템 모델 및 상태공간,전달함수 정의}
 \subsection{모델 간소화 및 자유도 축소}
 해당 탐구에서는 해석을 용이하게 하기위한,그리고  자원의 한계로 다음과 같은 가정하에서 프로젝트를 진행하였다.
-\begin{enumerate}
-    \item 날개는 대칭적이고 균일한 구조이다. 익형의 단면은 형상이 변하지 않는다.(길이 방향 탄성효과만 존재하고, 남은 두개의 방향으로의 변형은 무시한다)
-    \item 날개의 길이는 무한하다. Wing vortex 등 유한한 길이의 날개로 인한 효과는 무시하며, 2차원 익형 단면\footnote{airfoil cross-section} 해석으로 진행한다.
-    \item 날개의 길이 방향으로 인한 탄성학적 효과는 익형에 달려있는 두개의 스프링,두개의 댐퍼(viscous damper)로 근사할 수 있다
-    \item 해당 가상 실험은 풍동 내부에서 진행된다고 가정하며,실제 날개와의 유사성은 Dynamic Similarity에 의해 보장된다.
-    \item 순항고도 등, 비교적 steady한 상황에서 발생하는 진동에 대하여 탐구한다.해당 가정에서, 미소한 섭동(perturbation)은
-          선형화로 근사될 수 있으므로, 시스템은 선형시간불변성(LTI)으로 간주될 수 있다\cite{aircraft_control_and_simulation}.
-    \item 난류(gust)는 수직방향으로만 존재한다. 난류가 수평방향에 가하는 구조적 스트레스는 수직방향에 비해 충분히 작다고 가정한다.
-\end{enumerate}
+\subsection{모델 간소화 및 자유도 축소}
+해석의 용이성과 자원의 한계를 고려하여 다음 가정 하에 진행하였다. 날개는 형상이
+변하지 않는 대칭,균일 구조이다; 이때 탄성에 의한 효과는 길이 방향만 고려하며, 날개의 길이는
+무한하여 wing vortex와 같은 3차원 효과는 무시한다;길이 방향 탄성효과는 익형에 달린 두 스프링과 두 댐퍼로 근사한다.(에어포일 형상은 탄성의 영향을 받지 않는 강체로 가정한다.)
+실험은 풍동 내부를 가정하며 실제 날개와의 유사성은 Dynamic Similarity로 보장된다. 순항고도와 같이 비교적
+steady한 상황의 미소 섭동(perturbation)에서 시스템은 선형시간불변(LTI)으로 간주 될 수 있다.
+\cite{aircraft_control_and_simulation},마지막으로,난류(gust)는 구조적 스트레스가 지배적인 수직
+방향만 고려한다.
 
 \subsection{모델}
 날개의 거동학을 알기 위해 풍동 안에서 실험이 이루어진다고 하면, 날개의 익형(airfoil)이 일정하기 때문에 Chord length \(c_{chord}\)는 상수다. 그리고 무한히 긴 날개에서, 동체에서 \(b\)만큼 떨어진 날개의 단면에 대한
@@ -238,13 +234,15 @@ $w_n$을 고정시키고 탐구를 해보면, 질량을 증가시키면 시스�
 가하는 피로로 인해 득보다 실이 더 클 수도 있다는 것을 알게 되었다.
 \subsection{날개의 로우패스 필터 특성과 공명현상(WEEK3)}
 3주차부터는 위에서 서술한 2DOF 모델을 활용하여 탐구를 진행하였다. 난기류는 그 모델에 따라 \textit{von Kármán,Dryden} turbulent model 등 다양한
-모델이 존재한다. 이러한 모델에서 알 수 있는 특성으로는, 난기류는 저주파 부분에서 큰 진폭을 가지며,고주파 부분은 거의 존재하지 않는다는 부분을 확인 할 수 있었다.
+모델이 존재한다.\footnote{von-karman model:$\Phi_w(\omega)=\frac{\sigma_w^2 L_w}{\pi U}\,
+\frac{1+3\,(L_w\,\omega/U)^2}{\big[\,1+(L_w\,\omega/U)^2\,\big]^{2}}$ where $\sigma_w=1.5,L_w=1.0,a=1.339$} 
+이러한 모델에서 알 수 있는 특성으로는, 난기류는 저주파 부분에서 큰 진폭을 가지며,고주파 부분은 거의 존재하지 않는다는 부분을 확인 할 수 있었다.
 따라서 해당 근거에 따라서,아래 그림과 같이 날개가 로우패스 필터의 특성을 보이고,특정 주파수에서 진폭이 커지는 공진현상을 발견할 수 있었으므로,
 날개를 설계할때는 공명주파수를 너무 저주파는 아닌, 적당한 주파수 대역폭 사이에 잡아야 함을 알 수 있었다.해당 탐구에서는
 보다 더 확실한 날개의 로우패스 필터의 특성을 파악하기 위해, 여러개의 동일한 진폭을 가진 임의의 난기류 사인파를 만들어서, 그것에 대한 주파수 반응을 나타내보았다.
 \begin{figure}[H] % [H] forces the figure to be placed exactly where it appears in the text
     \centering % Horizontally center the figure
-    \includegraphics[width=\textwidth]{multisine_toolbox_response.png} % Include the figure
+    \includegraphics[width=\textwidth]{Figures/week3_multisine_toolbox_response.png} % Include the figure
     \captionsetup{justification=centering} % Centers this specific caption
     \caption{Frequency response of sine waves with rms=1.5 }
 \end{figure}
@@ -296,11 +294,32 @@ $w_n$을 고정시키고 탐구를 해보면, 질량을 증가시키면 시스�
 비선형의 경우에서 피로 또는 항복응력 초과의 확률이 더 높음을 알 수 있다.하지만, 주기적으로 힘이 작용하는 sine함수와 달리
 impulse와 같은, 단기적으로 힘이 작용하는 경우에는, 선형,비선형 스프링의 차이가 별로 없다는 점을 미뤄보아, 항공기의 속도가 빠르게 유지되어, 난기류 같은
 순간적인 impulse로 작용하는 힘만 존재한다고 가정하면, 충분히 비선형 시스템은 선형 시스템으로 취급되어 해석을 할 수 있음을 알 수 있었다.
-\section{결론}
-약 5주차에 걸쳐서 1DOF 모델에서 데이터를 역추적하여 모델에서의 등가 물리량 등을 구하고, 질량과 강성 사이에는
-trade-off가 있음을 알 수 있었다. 또한 2DOF 모델에서 날개의 로우패스 필터, 여러 물리량의 변화에 따른 고유값들의 변화를
-살펴보고,순항과정 중 특정한 상황에서는 비선형 모델을 선형 모델로 충분히 근사할 수 있음을 보였다.
-또 뭐써야하지? 아 근데 공간이 없는데 하하핳
+\section{결론: 최종 설계안}
+5주에 걸친 해석을 종합하면, 안정적이면서 경량인 날개는 아래와 같은 최소 세가지 시선을 만족해야함을 알 수 있다.
+\begin{itemize}
+    \item[1,2주차] 질량$\&$강성 trade-off에서 공진 진폭을 피로 한계 이내로 누르는 최소 강성
+\(k \approx \SI{}{\newton\per\metre}\)
+\item[3주차] 주파수 응답 공진 대역폭을 난류 저주파 공진주파수 밖으로 밀어내는 \(w_d\)
+\item[5주차] 플러터 한계를 최고 비행속도
+\(V_{\max}\) 이상으로 확보하기 위해 무게중심--탄성중심 간격 \(d\)  
+\end{itemize}
+4주차에서 보였듯 이 운용 영역에서는 비선형 경화 효과가 충분히 작아, 선형 해석만으로
+설계 검증이 타당하다. 위 세 조건을 만족하는 권장값은 \cref{tab:final}에 정리하였다.
+\begin{table}[H]
+    \centering
+    \caption{종합 해석으로부터 도출한 권장 설계 파라미터.}
+    \label{tab:final}
+    \begin{tabular}{lll}
+        \toprule
+        설계값               & 근거 (주차)                 & 권장 방향 / 값                          \\
+        \midrule
+        간격 \(d\)           & 플러터 한계 (5주)            & \(d \le 2.5203\SI{}{\centi\meter}\;(V_f=\qty{29.633}{m/s} > V_{\max} )\) \\
+        공진주파수\tablefootnote{위에 서술한 Von Karman식에 $V_f$값 대입시 값 감소가 뚜렷해지는 지점을 $w_d_crit$로 지정하였다} \(w_d\)    & 로우패스 대역 (3주)          & $w_d$ $\geq $13.55223\SI{}{\hertz}      \\
+        강성 \(k\)          & 질량--강성 trade-off (1·2주) & \(k \gtrsim \SI{5}{\newton\per\metre}\) \\
+        비선형 항             & 돌풍 응답 (4주)              & 순항조건에서 무시 가능                    \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 %----------------------------------------------------------------------------------------
 %	Appendix
 %----------------------------------------------------------------------------------------
